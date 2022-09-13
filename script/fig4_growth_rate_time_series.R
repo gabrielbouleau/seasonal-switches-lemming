@@ -151,9 +151,9 @@ points(log(Growth_pheno) ~ year, data = predator, col = color[4], type = "b", lw
 legend("bottom", legend = c( "Empirical", "Mechanistic", "Phenomenologic"), ncol = 3, cex = 2,
        pt.bg = 'white', lty = 1, lwd = c(2, 1.2, 1.2), bty = "n", pch = c(19, 22, 21), col = c("black", color[3:4]))
 
-#----------------------------#
-#   TEST AREA : Phase plot   #
-#----------------------------#
+#----------------#
+#   Phase plot   #
+#----------------#
 
 par(mgp = c(3, 1, 0))
 
@@ -200,7 +200,7 @@ par(mar = c(2, 7.1, 2, 4.1))
 
 plot(10,
      xlim = c(-5, 5), ylim = c(-5, 5),
-     xlab = NA, ylab = "$t+1$", xaxt = "n", cex.axis = 1.2, cex.lab = 2)
+     xlab = NA, ylab = "Growth rate\nyear $t+1$", xaxt = "n", cex.axis = 1.2, cex.lab = 2)
 
 abline(h = 0, v = 0, lty = 2, col = "grey")
 
@@ -219,7 +219,7 @@ par(mar = c(4.1, 7.1, 0, 4.1))
 
 plot(10,
      xlim = c(-5, 5), ylim = c(-5, 5),
-     xlab = "$t$", ylab = NA, cex.axis = 1.2, cex.lab = 2)
+     xlab = "year $t$", ylab = NA, cex.axis = 1.2, cex.lab = 2)
 
 abline(h = 0, v = 0, lty = 2, col = "grey")
 

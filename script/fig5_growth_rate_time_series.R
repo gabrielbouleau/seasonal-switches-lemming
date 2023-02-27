@@ -120,7 +120,7 @@ predator[, "Growth_pheno"] <- predict(pheno, newdata = predator, type = "respons
 #   Time-serie comparison plot    #
 #---------------------------------#
 
-tikz("results/fig4_growth_rate_time_series.tex", height = 5, width = 10, standAlone = TRUE)
+tikz("results/fig5_growth_rate_time_series.tex", height = 5, width = 10, standAlone = TRUE)
 
 # Set layout and margin
 layout(matrix(c(1,1,1,2,

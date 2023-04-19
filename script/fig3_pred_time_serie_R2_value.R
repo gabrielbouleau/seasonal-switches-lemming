@@ -100,9 +100,6 @@ plot(density ~ year, data = predator, type = "b", lwd = 1.9,
 
 axis(side = 1, at = seq(1993, 2020, by = 2), cex.axis = 1.5)
 
-# Grey line for reconstructed densities
-lines(density ~ year, data = predator[which(predator$year < 2004),], lwd = 2, col = color[1])
-
 points(density ~ year, data = predator, pch = 19, cex = 4.8, col = "white") # White circle to interupt the line
 
 # Thresholds

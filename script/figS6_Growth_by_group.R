@@ -156,7 +156,7 @@ mtext("Predation assemblages", 1, cex = 2, line = 4)
 
 boxplot(log(Growth_pheno) ~ pred_class, data = predator, border = color[4], lwd = 2, cex.axis = 1.5, add = TRUE)
 
-legend(5.8, 5.5, legend = c("Mechanistic", "Phenomenologic", "Observed values"), pch = c(NA, NA, 19), 
+legend(5.8, 5.5, legend = c("Mechanistic", "Phenomenological", "Observed values"), pch = c(NA, NA, 19), 
        lwd = c(2, 2, NA), box.lty = 0, col = c(color[c(3,4)], "black"), cex = 1.2)
 
 abline(h = 0, lty = 2, col = "grey")

@@ -155,7 +155,7 @@ text(threshold$jaeger$mu + 2, 0.010, paste("L* =", signif(threshold$jaeger$mu, 2
 barplot(weasel ~ year, data = predator[which(predator$Season == "S"),], col = color[4], 
         xlab = "", ylab = "", border = NA, las = 2, ylim = c(0, 3), cex.axis = 1.2, cex.names = 1.4)
 
-mtext("Abondance index", side = 2, line = 4, cex = 1.2)
+mtext("Abundance index", side = 2, line = 4, cex = 1.2)
 mtext("Years", side = 1, line = 4.5, cex = 1.2)
 
 mtext("Ermine", adj = 1.9, line = 4, cex = 2)
@@ -169,7 +169,7 @@ abline(h = 0.5, lty = 2)
 plot(weasel ~ density, data = predator[which(predator$Season == "S"),], pch = 19, col = color[4],
      xlab = "", ylab = "", cex.axis = 1.4)
 
-mtext("Abondance index", side = 2, line = 3, cex = 1.2)
+mtext("Abundance index", side = 2, line = 3, cex = 1.2)
 mtext("Lemming density\n(n/ha)", side = 1, line = 5, cex = 1.2)
 
 mtext("H)", adj = -0.2, line = 1.5, cex = 1.2)

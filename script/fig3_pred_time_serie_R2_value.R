@@ -254,7 +254,7 @@ points(R1_vector ~ c(0.9:9.9) , pch = 19)
 points(rep(pheno$pred_growth[1], 10) ~ c(1.1:10.1), pch = 19)
 
 
-legend(0.3 ~ 1, legend = c("Mechanistic", "Phenomenologic"),
+legend(0.3 ~ 1, legend = c("Mechanistic", "Phenomenological"),
        col = c("black", "black"), lwd = 2, bty = "n", lty = c(1, 2), cex = 1.5)
 
 text(4, 0.7, "Decline", font = 2, cex = 1.5)

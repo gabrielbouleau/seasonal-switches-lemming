@@ -4,15 +4,15 @@ This README file contain the information required to reproduce the result of the
 This paper is available here [Link to publication].
 
 ## Authors
-*Gabriel Bergeron -- Université de Sherbrooke, Sherbrooke, Québec, CAN -- gabriel.bergeron3@usherbrooke.ca
-Gilles Gauthier -- Université Laval, Québec, Québec, CAN
-Frithjof Lutscher -- University of Ottawa, Ottawa, Ontario, CAN
-Pierre Legagneux -- Université Laval, Québec, Québec, CAN
-Dominique Fauteux -- Canadian Museum of Nature, Ottawa, Ontario, CAN
-Joël Bêty -- Université du Québec à Rimouski -- Rimouski, Québec, CAN
-Dominique Berteaux -- Université Laval, Québec, Québec, CAN
-Chantal Hutchison -- Université Laval, Québec, Québec, CAN
-*Dominique Gravel -- Université de Sherbrooke, Sherbrooke, Québec, CAN -- dominique.gravel@usherbrooke.ca
+*Gabriel Bergeron -- Université de Sherbrooke, Sherbrooke, Québec, CAN -- gabriel.bergeron3@usherbrooke.ca\
+Gilles Gauthier -- Université Laval, Québec, Québec, CAN\
+Frithjof Lutscher -- University of Ottawa, Ottawa, Ontario, CAN\
+Pierre Legagneux -- Université Laval, Québec, Québec, CAN\
+Dominique Fauteux -- Canadian Museum of Nature, Ottawa, Ontario, CAN\
+Joël Bêty -- Université du Québec à Rimouski -- Rimouski, Québec, CAN\
+Dominique Berteaux -- Université Laval, Québec, Québec, CAN\
+Chantal Hutchison -- Université Laval, Québec, Québec, CAN\
+*Dominique Gravel -- Université de Sherbrooke, Sherbrooke, Québec, CAN -- dominique.gravel@usherbrooke.ca\
 
 *corresponding authors
 
@@ -27,7 +27,7 @@ Gabriel Bergeron writed the code and is the person responsable for it maintenanc
 
 Here is a list of the folders in this repository and what they contain:
 
-* **`data_clean`**: RDS files of cleaned data generated from the raw data files. Shuch raw files are available on (Nordicana D)[https://nordicana.cen.ulaval.ca/]
+* **`data_clean`**: RDS files of cleaned data generated from the raw data files. Shuch raw files are available on [Nordicana D](https://nordicana.cen.ulaval.ca/)
 * **`results`**: Output files of the analysis. Mainly graphics found in the publication and the supplementary material
 * **`script`**: R file needed to reproduce the models results and figures of the paper
 

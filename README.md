@@ -33,9 +33,9 @@ Here is a list of the folders in this repository and what they contain:
 
 Not included in the repository are the .svg files of the icons founds in figure 1. These icons were created by the user with the Inkscape software.
 
-R version 4.3.2 (2023-10-31 ucrt)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 11 x64 (build 22621)
+R version 4.3.2 (2023-10-31 ucrt)\
+Platform: x86_64-w64-mingw32/x64 (64-bit)\
+Running under: Windows 11 x64 (build 22621)\
 
 
 

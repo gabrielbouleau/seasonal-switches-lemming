@@ -3,6 +3,7 @@ library(tikzDevice)
 
 library(grImport2)
 library(rsvg)
+library(plotrix)
 
 library(deSolve)
 
@@ -14,7 +15,7 @@ color <- rgb(color[,1], color[, 2], color[, 3], maxColorValue = 255)[4:7]
 
 # Plot size : 30 * 15
 
-tikz("results/fig1_schema.tex", height = 18, width = 28, standAlone = TRUE)
+tikz("fig1_schema.tex", height = 18, width = 28, standAlone = TRUE)
 
 layout(matrix(c(1,1,2,2,7,7,7,
                 3,3,4,4,7,7,7,

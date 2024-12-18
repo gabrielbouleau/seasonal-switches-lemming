@@ -41,5 +41,6 @@ vignettes/*.pdf
 # Raw data folder
 data_raw/
 svg/
+results/
 
 .Rproj

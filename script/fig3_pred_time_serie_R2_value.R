@@ -15,9 +15,9 @@ color <- rgb(color[, 1], color[, 2], color[,3], max = 255)
 #-------------------#
 #   Predator data   #
 #-------------------#
-predator <- readRDS("data_clean/5_PredatorPresence.rds")
+predator <- readRDS("data_clean/2_PredatorPresence.rds")
 
-predator_infered <- readRDS("data_clean/Infered_predator_binom.rds")
+predator_infered <- readRDS("data_clean/3_infered_predator_binom.rds")
 
 
 
@@ -25,7 +25,7 @@ predator_infered <- readRDS("data_clean/Infered_predator_binom.rds")
 #   Lemming data   #
 #------------------#
 
-lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 predator <- left_join(predator, lemmingDensity, by = "year")
 
@@ -77,7 +77,7 @@ predator_infered$fox$fox_repro[which(predator_infered$fox$fox_repro == 1)] <- 15
 predator_infered$jaeger$jaeger[which(predator_infered$jaeger$jaeger == 1)] <- 15
 
 # Presence absence threshold 
-threshold <- readRDS("data_clean/predator_threshold.rds")
+threshold <- readRDS("data_clean/3_predator_threshold.rds")
 
 
 
@@ -85,7 +85,7 @@ threshold <- readRDS("data_clean/predator_threshold.rds")
 #   Create predator + lemming time-series    #
 #--------------------------------------------#
 
-tikz("results/fig3_pred_time_serie_R2_value.tex", height = 6, width = 12, standAlone = TRUE)
+tikz("fig3_pred_time_serie_R2_value.tex", height = 6, width = 12, standAlone = TRUE)
 
 layout(matrix(c(1,1,1,1,3,3,
                 1,1,1,1,3,3,
@@ -155,13 +155,13 @@ mtext("B)", adj = -0.1, line = 3, cex = 2)
 
 par(mar = c(13.1, 4.5, 13.1, 0.5), bty = "o")
 
-meca <- readRDS("data_clean/7_R2_meca.RDS")
+meca <- readRDS("data_clean/5_R2_meca.RDS")
 
 #------------------------------------------------------------#
 #   Phenomenological - Create a predicted value data frame   #
 #------------------------------------------------------------#
 
-glm1 <- readRDS("data_clean/glm1_log.RDS")
+glm1 <- readRDS("data_clean/4_glm_log.RDS")
 
 pheno <- data.frame(owl =       c(1,0,0, 1,0,0,0,0,1,1,0),
                    fox_repro = c(0,1,0, 1,0,0,1,0,1,0,1),

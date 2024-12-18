@@ -9,15 +9,15 @@ color <- rgb(color[, 1], color[, 2], color[,3], max = 255)
 #-------------------#
 #   Predator data   #
 #-------------------#
-predator <- readRDS("data_clean/5_PredatorPresence.rds")
+predator <- readRDS("data_clean/2_PredatorPresence.rds")
 
-predator_infered <- readRDS("data_clean/Infered_predator_binom.rds")
+predator_infered <- readRDS("data_clean/3_infered_predator_binom.rds")
 
 
 #------------------#
 #   Lemming data   #
 #------------------#
-lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 predator <- left_join(predator, lemmingDensity, by = "year")
 predator[which(predator$period == "P3"), "density"] <- NA
@@ -56,8 +56,8 @@ predator <- predator[-nrow(predator), ]
 #   Predict mechanistic growth    #
 #---------------------------------#
 
-meca <- readRDS("data_clean/7_R2_meca.RDS")
-meca_se <- readRDS("data_clean/7_R2_var_meca.RDS")
+meca <- readRDS("data_clean/5_R2_meca.RDS")
+meca_se <- readRDS("data_clean/5_R2_var_meca.RDS")
 
 # Add growth rate prediction + confidence interval
 predator[, "meca_fit"] <- 0
@@ -138,7 +138,7 @@ predator <- mutate(predator,
 #   Predict phenomenologic growth   #
 #-----------------------------------#
 
-pheno <- readRDS("data_clean/glm1_log.RDS")
+pheno <- readRDS("data_clean/4_glm_log.RDS")
 
 ilink <- family(pheno)$linkinv
 
@@ -154,7 +154,7 @@ predator <- mutate(predator,
 #   Time-serie comparison plot    #
 #---------------------------------#
 
-tikz("results/fig5_growth_rate_time_series.tex", height = 5, width = 10, standAlone = TRUE)
+tikz("fig5_growth_rate_time_series.tex", height = 5, width = 10, standAlone = TRUE)
 
 # Set layout and margin
 layout(matrix(c(1,1,1,2,

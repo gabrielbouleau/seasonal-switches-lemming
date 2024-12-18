@@ -20,7 +20,7 @@ lemming_data <- subset(lemming_data, Species %in% c("brown lemming", "collared l
 # Get lemming mean mass to use in biomass conversion
 lem_mass <- signif(mean(lemming_data$Mass, na.rm = TRUE), 4)
 
-saveRDS(lem_mass, "data_clean/2_1_lemmingMass.rds") 
+saveRDS(lem_mass, "data_clean/1_lemmingMass.rds") 
 
 
 #-------------------------------------------------   -----#
@@ -113,4 +113,4 @@ lemmingMeanDensity <- rbind(LG1, LG2, reconstructed) %>%
   mutate(biomass = density * lem_mass) %>% 
   mutate(d_estimate = ifelse(year >= 2004, "secr", "log-log"))
 
-saveRDS(lemmingMeanDensity, "data_clean/2_lemmingMeanDensity.rds")
+saveRDS(lemmingMeanDensity, "data_clean/1_lemmingMeanDensity.rds")

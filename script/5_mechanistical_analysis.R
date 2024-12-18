@@ -5,15 +5,15 @@ library(tidyverse)
 #-------------------#
 #   Predator data   #
 #-------------------#
-predator <- readRDS("data_clean/5_PredatorPresence.rds")
+predator <- readRDS("data_clean/2_PredatorPresence.rds")
 
-threshold <- readRDS("data_clean/predator_threshold.rds")
+threshold <- readRDS("data_clean/3_predator_threshold.rds")
 
 
 #------------------#
 #   Lemming data   #
 #------------------#
-lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 predator <- predator[which(predator$Season == "S"),]
 
@@ -58,7 +58,7 @@ pred[which(pred$specie == "weasel" & pred$season == "Lsummer"), "alpha"] <- pred
 pred[which(pred$specie == "weasel" & pred$season == "winter"), "alpha"] <- pred[5, "Q_d_ind"] * pred[3, "alpha"] / pred[3, "Q_d_ind"]
 
 # Save 
-saveRDS(pred, "data_clean/7_meca_attack_rate.RDS")
+saveRDS(pred, "data_clean/5_meca_attack_rate.RDS")
 
 #--------------------------------------------#
 #  Measure the Ri value for each assemblage  #
@@ -124,7 +124,7 @@ R2_meca <- list(Lem_alone = Lem_alone, Owl = Owl, Fox = Fox, Jaeger = Jaeger, We
                 JW = JW, OJW = OJW, FJ = FJ, OFJ = OFJ, FJW = FJW, OFJW = OFJW, R1_FW = R1_FW,
                 R1_F = R1_F, R1_W = R1_W)
 
-saveRDS(R2_meca, "data_clean/7_R2_meca.RDS")
+saveRDS(R2_meca, "data_clean/5_R2_meca.RDS")
 
 
 #---------------------------------------------------#
@@ -335,7 +335,7 @@ R2_var_meca <- list(Lem_alone = var.R1_FW,
                     FJW = var.R2_FJW,
                     OFJW = var.R2_FJWO)
 
-saveRDS(R2_var_meca, "data_clean/7_R2_var_meca.RDS")
+saveRDS(R2_var_meca, "data_clean/5_R2_var_meca.RDS")
 
 #--------------------------------                                             -----#
 #   Measure what is the density of predator needed to bring the growth rate to 0   #

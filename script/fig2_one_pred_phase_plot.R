@@ -26,7 +26,7 @@ k <- c(15:2, 1/c(1:15))
 R2 <- 1 / R1^k[1]
 Lstar <- 2
 
-tikz(file = "results/fig2_one_pred_phase_plot.tex", width = 10, height = 5, standAlone = TRUE)
+tikz(file = "fig2_one_pred_phase_plot.tex", width = 10, height = 5, standAlone = TRUE)
 
 #---------------------------------------#
 # R2 vs R1 plot for different K value   #
@@ -123,86 +123,4 @@ for (i in 1:length(k_vector)) {
 }
 
 dev.off()
-
-# #-------------------------------------------------#
-# # Plot of cycle lenght along the diagonal         #
-# #-------------------------------------------------#
-# 
-# pdf(file = "paper_fig/supp1_1_period_plot.pdf", width = 8, height = 8)
-# 
-# par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1)) 
-# 
-# ab_values <- find_intersect(x1, x2, y1, y2, k_vector[1])[3:4]
-# 
-# R1[1] <- 1.05
-# 
-# R1 <- c(1.01, R1)
-# 
-# R2 <- exp(ab_values[2]) * R1^ab_values[1] # Formula of the diagonal for each R1. R1 and R2 are then coordinate of the diagonal
-# 
-# freq <- matrix(rep(NA, 3003), ncol = 3)
-# 
-# for (i in 1:length(R1)) {
-#   
-#   L <- numeric(1500)
-#   
-#   L[1] <- 1
-#   
-#   Lstar <- 2
-#   
-#   for(j in 2:length(L)){
-#     if (L[j-1] < Lstar) {L[j] <- L[j-1]*R1[i]
-#     
-#     } else if (L[j-1] >= Lstar) {L[j] <- L[j-1]*R2[i]} 
-#   }
-#   
-#   maxima <- which(diff(sign(diff(L[100:1500]))) == -2)+1
-#   freq_plus <- max(diff(maxima))
-#   freq_min  <- min(diff(maxima))
-#   freq_mean <- mean(diff(maxima))
-#   
-#   freq[i, ] <- c(freq_plus, freq_mean, freq_min)
-#   
-# }
-# 
-# plot(freq[, 2] ~ R1, log = "xy", type = "l", lwd = 2,
-#      ylab = "Mean period", xlab = "R1 value",
-#      xaxs = "i", yaxs = "i", 
-#      xlim = c(1, 100), ylim = c(1, 500))
-# 
-# 
-# # Add horizontal line for period length
-# 
-# abline(h = c(3, 3.5, 4, 6), col = grey, lty = 2, lwd = 1.5)
-# 
-# 
-# # Add the point on the diagonal in the frequency plot
-# 
-# freq_diag <- numeric(length(k_vector))
-# 
-# for (i in 1:length(freq_diag)) {
-# 
-#   L <- numeric(800)
-#   
-#   L[1] <- 1
-#   
-#   Lstar <- 2
-#   
-#   for(j in 2:length(L)){
-#     if (L[j-1] < Lstar) {L[j] <- L[j-1]*diagonal[i, 1]
-#     
-#     } else if (L[j-1] >= Lstar) {L[j] <- L[j-1]*diagonal[i, 2]} 
-#   }
-#   
-#   maxima <- which(diff(sign(diff(L[100:800]))) == -2)+1
-# 
-#   freq_mean <- mean(diff(maxima))
-#   
-#   freq_diag[i] <- freq_mean
-#     
-# }
-# 
-# points(freq_diag ~ diagonal[, 1], col = color, pch = 19, cex = 1.5)
-# 
-# dev.off()
 

@@ -9,10 +9,10 @@ library(tidyverse)
 #   Load and set lemming and predator data   #
 #--------------------------------------------#
 # Load lemming time series
-lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 # Predator presence/absence time series
-predator <- readRDS("data_clean/5_PredatorPresence.rds") %>% 
+predator <- readRDS("data_clean/2_PredatorPresence.rds") %>% 
   filter(period == "P1") %>% 
   dplyr::select(year, fox_repro, jaeger, owl, weasel)
 
@@ -38,7 +38,7 @@ glm4 <- glm(weasel ~ density, data = predator, family = "binomial")
 
 # Save model results in a list
 binomial.models <- list(owl = glm1, fox = glm2, jaeger = glm3, weasel = glm4)
-saveRDS(binomial.models, "data_clean/binomial_glm.rds")
+saveRDS(binomial.models, "data_clean/3_binomial_glm.rds")
 
 
 #------------------------------------------------------#
@@ -69,7 +69,7 @@ threshold <- list(owl = list(mu = mu1, sd = sd1),
                   jaeger = list(mu = mu3, sd = sd3),
                   weasel = list(mu = mu4, sd = sd4))
 
-saveRDS(threshold, "data_clean/predator_threshold.rds")
+saveRDS(threshold, "data_clean/3_predator_threshold.rds")
 
 
 #---------------------------------------------------------------#
@@ -90,4 +90,4 @@ fox$fox_repro <- round(predict(binomial.models$fox, newdata = fox, type = "respo
 jaeger$jaeger <- round(predict(binomial.models$jaeger, newdata = jaeger, type = "response"))
 
 #  Save to rds
-saveRDS(list(fox = fox, jaeger = jaeger), "data_clean/Infered_predator_binom.rds")
+saveRDS(list(fox = fox, jaeger = jaeger), "data_clean/3_infered_predator_binom.rds")

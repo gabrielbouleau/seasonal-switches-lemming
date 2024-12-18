@@ -6,15 +6,15 @@ library(viridis)
 #-------------------#
 #   Predator data   #
 #-------------------#
-predator <- readRDS("data_clean/5_PredatorPresence.rds")
+predator <- readRDS("data_clean/2_PredatorPresence.rds")
 
-predator_infered <- readRDS("data_clean/Infered_predator_binom.rds")
+predator_infered <- readRDS("data_clean/2_infered_predator_binom.rds")
 
 
 #------------------#
 #   Lemming data   #
 #------------------#
-lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 predator <- left_join(predator, lemmingDensity, by = "year")
 predator[which(predator$period == "P3"), "density"] <- NA
@@ -81,7 +81,7 @@ glm15.log <- glm(exp(Growth) ~ owl, data = predator[-nrow(predator), ], family =
 
 glm.log.list <- mget(ls(pattern = "glm"))
 
-saveRDS(glm07.log, "data_clean/glm1_log.RDS")
+saveRDS(glm07.log, "data_clean/4_glm_log.RDS")
 
 
 #------------------------------#

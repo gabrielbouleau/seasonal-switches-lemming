@@ -1,21 +1,20 @@
 library(tidyverse)
 library(viridis)
 
-# Test the glm for reconstructed density and predator group
+# Run the glm for reconstructed density and predator group
 
 #-------------------#
 #   Predator data   #
 #-------------------#
-predator <- readRDS("script/Clean_Rdata/5_PredatorPresence.rds")
+predator <- readRDS("data_clean/5_PredatorPresence.rds")
 
-predator_infered <- readRDS("script/Clean_Rdata/Infered_predator_binom.rds")
-
+predator_infered <- readRDS("data_clean/Infered_predator_binom.rds")
 
 
 #------------------#
 #   Lemming data   #
 #------------------#
-lemmingDensity <- readRDS("script/Clean_Rdata/2_lemmingMeanDensity.rds")[, c(1,2)]
+lemmingDensity <- readRDS("data_clean/2_lemmingMeanDensity.rds")[, c(1,2)]
 
 predator <- left_join(predator, lemmingDensity, by = "year")
 predator[which(predator$period == "P3"), "density"] <- NA
@@ -23,10 +22,9 @@ predator[which(predator$period == "P3"), "density"] <- NA
 predator <- predator[which(predator$Season == "S"),]
 
 
-
-#-------------------------------------#
-#   Mesure growth during each year    #
-#-------------------------------------#
+#--------------------------------------#
+#   Measure growth during each year    #
+#--------------------------------------#
 Growth <- lemmingDensity
 
 Growth[, "Growth"] <- 0
@@ -36,10 +34,9 @@ for (i in 1:(nrow(Growth) - 1)) {
 }
 
 
-#-----------------------------------------#
-#   Merge predator and predator_infered   #
-#-----------------------------------------#
-
+#------------------------------------------#
+#   Merge predator and predator_inferred   #
+#------------------------------------------#
 predator <- predator[which(predator$Season == "S"), ]
 
 predator[1:nrow(predator_infered$fox), "fox_repro"] <- predator_infered$fox$fox_repro
@@ -49,40 +46,42 @@ predator[1:nrow(predator_infered$jaeger), "jaeger"] <- predator_infered$jaeger$j
 predator <- left_join(predator, Growth[, -2], by = "year")
 
 
-#------------------------------#
-#   Lunch glm gaussian log !   #
-#------------------------------#
-glm01.log <- glm(exp(Growth) ~ weasel + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+#-------------------------#
+#   Lunch glm gamma log   #
+#-------------------------#
+glm01.log <- glm(exp(Growth) ~ weasel + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm02.log <- glm(exp(Growth) ~ fox_repro + weasel, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm02.log <- glm(exp(Growth) ~ fox_repro + weasel, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm03.log <- glm(exp(Growth) ~ fox_repro + weasel + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm03.log <- glm(exp(Growth) ~ fox_repro + weasel + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm04.log <- glm(exp(Growth) ~ owl + weasel + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm04.log <- glm(exp(Growth) ~ owl + weasel + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm05.log <- glm(exp(Growth) ~ owl + fox_repro + weasel, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm05.log <- glm(exp(Growth) ~ owl + fox_repro + weasel, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm06.log <- glm(exp(Growth) ~ jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm06.log <- glm(exp(Growth) ~ jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm07.log <- glm(exp(Growth) ~ owl + fox_repro + jaeger + weasel, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm07.log <- glm(exp(Growth) ~ owl + fox_repro + jaeger + weasel, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm08.log <- glm(exp(Growth) ~ fox_repro + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm08.log <- glm(exp(Growth) ~ fox_repro + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm09.log <- glm(exp(Growth) ~ owl + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm09.log <- glm(exp(Growth) ~ owl + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm10.log <- glm(exp(Growth) ~ owl + fox_repro + jaeger, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm10.log <- glm(exp(Growth) ~ owl + fox_repro + jaeger, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm11.log <- glm(exp(Growth) ~ fox_repro, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm11.log <- glm(exp(Growth) ~ fox_repro, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm12.log <- glm(exp(Growth) ~ owl + weasel, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm12.log <- glm(exp(Growth) ~ owl + weasel, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm13.log <- glm(exp(Growth) ~ weasel, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm13.log <- glm(exp(Growth) ~ weasel, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm14.log <- glm(exp(Growth) ~ owl + fox_repro, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm14.log <- glm(exp(Growth) ~ owl + fox_repro, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
-glm15.log <- glm(exp(Growth) ~ owl, data = predator[-nrow(predator), ], family = gaussian(link = "log"))
+glm15.log <- glm(exp(Growth) ~ owl, data = predator[-nrow(predator), ], family = Gamma(link = "log"))
 
 glm.log.list <- mget(ls(pattern = "glm"))
+
+saveRDS(glm07.log, "data_clean/glm1_log.RDS")
 
 
 #------------------------------#
@@ -96,9 +95,11 @@ colnames(glm.stat) <- c("int", "int.sd",
                         "fox", "fox.sd",
                         "jaeger", "jaeger.sd",
                         "weasel", "weasel.sd",
-                        "log.like", "delta.AIC")
+                        "log.like", "AIC")
 
 for (i in 1:length(glm.log.list)) {
+  
+  shape <- MASS::gamma.shape(glm.log.list[[i]])
   
   # Intercept
     
@@ -106,7 +107,7 @@ for (i in 1:length(glm.log.list)) {
     glm.stat[i, "int"] <- glm.log.list[[i]]$coefficients[1]
   
     # sd
-    glm.stat[i, "int.sd"] <- summary(glm.log.list[[i]])$coefficients[which(names(glm.log.list[[i]]$coefficients) == "(Intercept)"), "Std. Error"]
+    glm.stat[i, "int.sd"] <- summary(glm.log.list[[i]], dispersion = 1/shape$alpha)$coefficients[which(names(glm.log.list[[i]]$coefficients) == "(Intercept)"), "Std. Error"]
   
   # Owl
   if("owl" %in% names(coef(glm.log.list[[i]]))){
@@ -114,7 +115,7 @@ for (i in 1:length(glm.log.list)) {
     glm.stat[i, "owl"] <- glm.log.list[[i]]$coefficients[which(names(glm.log.list[[i]]$coefficients) == "owl")]
     
     # sd
-    glm.stat[i, "owl.sd"] <- summary(glm.log.list[[i]])$coefficients[which(names(glm.log.list[[i]]$coefficients) == "owl"), "Std. Error"]
+    glm.stat[i, "owl.sd"] <- summary(glm.log.list[[i]], dispersion = 1/shape$alpha)$coefficients[which(names(glm.log.list[[i]]$coefficients) == "owl"), "Std. Error"]
     
   }
     
@@ -124,7 +125,7 @@ for (i in 1:length(glm.log.list)) {
     glm.stat[i, "fox"] <- glm.log.list[[i]]$coefficients[which(names(glm.log.list[[i]]$coefficients) == "fox_repro")]
     
     # sd
-    glm.stat[i, "fox.sd"] <- summary(glm.log.list[[i]])$coefficients[which(names(glm.log.list[[i]]$coefficients) == "fox_repro"), "Std. Error"]
+    glm.stat[i, "fox.sd"] <- summary(glm.log.list[[i]], dispersion = 1/shape$alpha)$coefficients[which(names(glm.log.list[[i]]$coefficients) == "fox_repro"), "Std. Error"]
   }
     
   # jaeger
@@ -133,7 +134,7 @@ for (i in 1:length(glm.log.list)) {
     glm.stat[i, "jaeger"] <- glm.log.list[[i]]$coefficients[which(names(glm.log.list[[i]]$coefficients) == "jaeger")]
     
     # sd
-    glm.stat[i, "jaeger.sd"] <- summary(glm.log.list[[i]])$coefficients[which(names(glm.log.list[[i]]$coefficients) == "jaeger"), "Std. Error"]
+    glm.stat[i, "jaeger.sd"] <- summary(glm.log.list[[i]], dispersion = 1/shape$alpha)$coefficients[which(names(glm.log.list[[i]]$coefficients) == "jaeger"), "Std. Error"]
   }
     
   # weasel
@@ -142,30 +143,24 @@ for (i in 1:length(glm.log.list)) {
     glm.stat[i, "weasel"] <- glm.log.list[[i]]$coefficients[which(names(glm.log.list[[i]]$coefficients) == "weasel")]
     
     # sd
-    glm.stat[i, "weasel.sd"] <- summary(glm.log.list[[i]])$coefficients[which(names(glm.log.list[[i]]$coefficients) == "weasel"), "Std. Error"]
+    glm.stat[i, "weasel.sd"] <- summary(glm.log.list[[i]], dispersion = 1/shape$alpha)$coefficients[which(names(glm.log.list[[i]]$coefficients) == "weasel"), "Std. Error"]
   }
   
   # Log-likelihood
   glm.stat[i, "log.like"] <- logLik(glm.log.list[[i]])[1]
   
   # Delta AIC
-  if(i == 1){
-    glm.stat[i, "delta.AIC"] <- 0
-    base.AIC <- glm.log.list[[i]]$aic
-    
-  } else {
-    glm.stat[i, "delta.AIC"] <- glm.log.list[[i]]$aic - base.AIC
-    
-  }
-
+  glm.stat[i, "AIC"] <- glm.log.list[[i]]$aic
+  
 }
 
+## Compute delta AIC
+base.AIC <- min(glm.stat[, "AIC"])
+delta.AIC <- glm.stat[, "AIC"] - base.AIC
 
 #--------------------#
 #   Compute 95% CI   #
 #--------------------#
-
-
 CI <- matrix(NA, nrow = length(glm.log.list), ncol = 10)
 
 colnames(CI) <- c("lwr.int", "upr.int",
@@ -198,3 +193,4 @@ for (i in 1:length(glm.log.list)) {
   CI[i, "upr.weasel"] <- glm.stat[i, "weasel"] + 1.96 * glm.stat[i, "weasel.sd"]
 
 }
+

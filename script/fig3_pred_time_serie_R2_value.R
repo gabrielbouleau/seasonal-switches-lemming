@@ -157,8 +157,47 @@ par(mar = c(13.1, 4.5, 13.1, 0.5), bty = "o")
 
 meca <- readRDS("data_clean/7_R2_meca.RDS")
 
-pheno <- readRDS("data_clean/11_R2_pheno.rds")
+#------------------------------------------------------------#
+#   Phenomenological - Create a predicted value data frame   #
+#------------------------------------------------------------#
 
+glm1 <- readRDS("data_clean/glm1_log.RDS")
+
+pheno <- data.frame(owl =       c(1,0,0, 1,0,0,0,0,1,1,0),
+                   fox_repro = c(0,1,0, 1,0,0,1,0,1,0,1),
+                   jaeger =    c(0,0,1, 1,1,0,1,0,1,1,1),
+                   weasel =    c(0,0,0, 1,1,0,0,1,0,1,1))
+
+for (i in 1:nrow(pheno)) {
+  
+  pclass <- NULL
+  
+  if(pheno[i, "owl"] == 1) pclass <- paste0(pclass, "O")
+  
+  if(pheno[i, "fox_repro"] == 1) pclass <- paste0(pclass, "F")
+  
+  if(pheno[i, "jaeger"] == 1) pclass <- paste0(pclass, "J")
+  
+  if(pheno[i, "weasel"] == 1) pclass <- paste0(pclass, "W")
+  
+  if(is.null(pclass)) pclass <- "none"
+  
+  pheno[i, "pred_class"] <- pclass
+  
+}
+
+pheno$pred_class <- factor(pheno$pred_class, levels = c("none", "O", "F", "J","W", "JW", "OJW", "FJ", "OFJ", "FJW", "OFJW"))
+
+pheno <- pheno[order(pheno$pred_class), ]
+
+
+pheno[, "pred_growth"] <- predict(glm1, newdata = pheno, type = "response")
+
+pheno <- pheno[, c(5,6)]
+
+#-------------------#
+#   Initiate plot   #
+#-------------------#
 
 plot(NULL, xlim=c(1, 10), ylim=c(0.1 , 110), xaxt = "n", yaxt = "n",
      xlab = "Predator assemblages", ylab = "$R_i$ values", log = "y", cex.lab = 2)

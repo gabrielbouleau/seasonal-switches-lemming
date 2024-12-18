@@ -215,7 +215,7 @@ z.weasel <- ks::kde(log(weasel.points), compute.cont=TRUE) %>% # Compute the den
 # R2 vs R1 plot for different K value   #
 #---------------------------------------#
 
-pdf("results/=figS4_mechanistic_stochastic_parameter_plane_plot.pdf", height = 12, width = 8)
+pdf("results/figS4_mechanistic_stochastic_parameter_plane_plot.pdf", height = 12, width = 8)
 
 par(mar = c(6.1, 5.1, 4.1, 2.1))
 

@@ -57,9 +57,11 @@ predator <- predator[-nrow(predator), ]
 #---------------------------------#
 
 meca <- readRDS("data_clean/7_R2_meca.RDS")
+meca_se <- readRDS("data_clean/7_R2_var_meca.RDS")
 
-# Add growth rate prediction
-predator[, "Growth_meca"] <- 0
+# Add growth rate prediction + confidence interval
+predator[, "meca_fit"] <- 0
+predator[, "meca_se"] <- 0
 
 for (i in 1:nrow(predator)) {
   
@@ -71,17 +73,28 @@ for (i in 1:nrow(predator)) {
         
         if(predator[i, "weasel"] == 1){
           
-          predator[i, "Growth_meca"] <- meca$OFJW
+          predator[i, "meca_fit"] <- meca$OFJW
+          predator[i, "meca_se"] <- meca_se$OFJW
           
-        } else { predator[i, "Growth_meca"] <- meca$OFJ }
+        } else { 
+          predator[i, "meca_fit"] <- meca$OFJ
+          predator[i, "meca_se"] <- meca_se$OFJ
+          }
         
       } else if (predator[i, "weasel"] == 1){
         
-        predator[i, "Growth_meca"] <- meca$FJW
+        predator[i, "meca_fit"] <- meca$FJW
+        predator[i, "meca_se"] <- meca_se$FJW
         
-      } else { predator[i, "Growth_meca"] <- meca$FJ}
+      } else { 
+        predator[i, "meca_fit"] <- meca$FJ
+        predator[i, "meca_se"] <- meca_se$FJ
+        }
       
-    } else { predator[i, "Growth_meca"] <- meca$Fox}
+    } else { 
+      predator[i, "meca_fit"] <- meca$Fox
+      predator[i, "meca_se"] <- meca_se$Fox
+      }
     
   } else if(predator[i, "weasel"] == 1){
     
@@ -89,23 +102,37 @@ for (i in 1:nrow(predator)) {
       
       if(predator[i, "owl"] == 1){
         
-        predator[i, "Growth_meca"] <- meca$OJW
+        predator[i, "meca_fit"] <- meca$OJW
+        predator[i, "meca_se"] <- meca_se$OJW
         
-      } else { predator[i, "Growth_meca"] <- meca$JW}
+      } else { 
+        predator[i, "meca_fit"] <- meca$JW
+        predator[i, "meca_se"] <- meca_se$JW
+        }
       
-    } else { predator[i, "Growth_meca"] <- meca$Weasel}
+    } else { 
+      predator[i, "meca_fit"] <- meca$Weasel
+      predator[i, "meca_se"] <- meca_se$Weasel}
     
   } else if (predator[i, "owl"] == 1){
     
-    predator[i, "Growth_meca"] <- meca$Owl
+    predator[i, "meca_fit"] <- meca$Owl
     
   } else if (predator[i, "jaeger"] == 1){
     
-    predator[i, "Growth_meca"] <- meca$Jaeger
+    predator[i, "meca_fit"] <- meca$Jaeger
     
-  } else {predator[i, "Growth_meca"] <- meca$R1_FW}
+  } else {
+    predator[i, "meca_fit"] <- meca$R1_FW
+    predator[i, "meca_se"] <- meca_se$Lem_alone}
 }
 
+predator <- mutate(predator,
+                   meca_fit = log(meca_fit))
+
+predator <- mutate(predator,
+                   meca_upr = meca_fit + (1.96 * meca_se),
+                   meca_lwr = meca_fit - (1.96 * meca_se))
 
 #-----------------------------------#
 #   Predict phenomenologic growth   #
@@ -113,7 +140,14 @@ for (i in 1:nrow(predator)) {
 
 pheno <- readRDS("data_clean/glm1_log.RDS")
 
-predator[, "Growth_pheno"] <- predict(pheno, newdata = predator, type = "response")
+ilink <- family(pheno)$linkinv
+
+predator <- bind_cols(predator, setNames(as_tibble(predict(pheno, predator, se.fit = TRUE)[1:2]), 
+                                         c("pheno_fit_link", "pheno_se_link")))
+
+predator <- mutate(predator,
+                   pheno_upr = log(ilink(pheno_fit_link + (1.96 * pheno_se_link))),
+                   pheno_lwr = log(ilink(pheno_fit_link - (1.96 * pheno_se_link))))
 
 
 #---------------------------------#
@@ -144,9 +178,17 @@ mtext("Year", 1, cex = 2, line = 4)
 
 abline(h = 0, lty = 2, col = "grey", lwd = 2.5)
 
-points(log(Growth_meca) ~ year, data = predator, col = color[3], type = "b", lwd = 1.2, pch = 0)
+points(meca_fit ~ year, data = predator, col = color[3], type = "b", lwd = 1.2, pch = 0)
 
-points(log(Growth_pheno) ~ year, data = predator, col = color[4], type = "b", lwd = 1.2, pch = 1)
+polygon(x = c(predator$year, rev(predator$year)),
+        y = c(predator$ meca_upr, rev(predator$meca_lwr)), 
+        col = adjustcolor(color[3], alpha = 0.20), border = NA)
+
+points(pheno_fit_link ~ year, data = predator, col = color[4], type = "b", lwd = 1.2, pch = 1)
+
+polygon(x = c(predator$year, rev(predator$year)),
+        y = c(predator$ pheno_upr, rev(predator$pheno_lwr)), 
+        col = adjustcolor(color[4], alpha = 0.20), border = NA)
 
 legend("bottom", legend = c( "Empirical", "Mechanistic", "Phenomenologic"), ncol = 3, cex = 2,
        pt.bg = 'white', lty = 1, lwd = c(2, 1.2, 1.2), bty = "n", pch = c(19, 22, 21), col = c("black", color[3:4]))
@@ -185,14 +227,14 @@ plot(10,
 
 abline(h = 0, v = 0, lty = 2, col = "grey")
 
-segments(x0 = head(log(predator$Growth_meca[-nrow(predator)]), -1),
-         y0 = head(log(predator$Growth_meca[-1]), -1),
-         x1 = tail(log(predator$Growth_meca[-nrow(predator)]), -1),
-         y1 = tail(log(predator$Growth_meca[-1]), -1),
+segments(x0 = head(predator$meca_fit[-nrow(predator)], -1),
+         y0 = head(predator$meca_fit[-1], -1),
+         x1 = tail(predator$meca_fit[-nrow(predator)], -1),
+         y1 = tail(predator$meca_fit[-1], -1),
          lwd = 2, col = col.mec)
 
-# points(log(predator$Growth_meca[-1]) ~ log(predator$Growth_meca[-nrow(predator)]), cex = 3, col = "white", pch = 19)
-points(log(predator$Growth_meca[-1]) ~ log(predator$Growth_meca[-nrow(predator)]), cex = 1.5, col = col.mec, pch = 19)
+# points(log(predator$meca_fit[-1]) ~ log(predator$meca_fit[-nrow(predator)]), cex = 3, col = "white", pch = 19)
+points(predator$meca_fit[-1] ~ predator$meca_fit[-nrow(predator)], cex = 1.5, col = col.mec, pch = 19)
 
 
 # Empirical phase plot
@@ -223,13 +265,13 @@ plot(10,
 
 abline(h = 0, v = 0, lty = 2, col = "grey")
 
-segments(x0 = head(log(predator$Growth_pheno[-nrow(predator)]), -1),
-         y0 = head(log(predator$Growth_pheno[-1]), -1),
-         x1 = tail(log(predator$Growth_pheno[-nrow(predator)]), -1),
-         y1 = tail(log(predator$Growth_pheno[-1]), -1),
+segments(x0 = head(predator$pheno_fit_link[-nrow(predator)], -1),
+         y0 = head(predator$pheno_fit_link[-1], -1),
+         x1 = tail(predator$pheno_fit_link[-nrow(predator)], -1),
+         y1 = tail(predator$pheno_fit_link[-1], -1),
          lwd = 2, col = col.phe)
 
 # points(log(predator$Growth_pheno[-1]) ~ log(predator$Growth_pheno[-nrow(predator)]), cex = 3, col = "white", pch = 19)
-points(log(predator$Growth_pheno[-1]) ~ log(predator$Growth_pheno[-nrow(predator)]), cex = 1.5, col = col.phe, pch = 19)
+points(predator$pheno_fit_link[-1] ~ predator$pheno_fit_link[-nrow(predator)], cex = 1.5, col = col.phe, pch = 19)
 
 dev.off()

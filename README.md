@@ -21,17 +21,22 @@ Life has evolved different strategies to take advantage of seasonal constraints 
 
 ## Code authorship and maintenance
 
-Gabriel Bergeron writed the code and is the person responsable for it maintenance. 
+## Workflow
 
-## Forlders information
+![](https://github.com/gabrielbouleau/seasonal-switches-lemming/blob/master/workflow.png?raw=true)
+
+## data file description
+
+## Folders information
 
 Here is a list of the folders in this repository and what they contain:
 
-* **`data_clean`**: RDS files of cleaned data generated from the raw data files. Shuch raw files are available on [Nordicana D](https://nordicana.cen.ulaval.ca/)
-* **`results`**: Output files of the analysis. Mainly graphics found in the publication and the supplementary material
+* **`data_raw`**: files of data used in the analysis. Shuch raw files are available on [Nordicana D](https://nordicana.cen.ulaval.ca/) and should be cited accordingly when used.
 * **`script`**: R file needed to reproduce the models results and figures of the paper
 
-Not included in the repository are the .svg files of the icons founds in figure 1. These icons were created by the user with the Inkscape software.
+Not included in the repository are the .svg files of the icons founds in figure 1. These icons were created by the user with the Inkscape software. Files can be made available by contacting the authors.
+
+# Package version info
 
 R version 4.3.2 (2023-10-31 ucrt)\
 Platform: x86_64-w64-mingw32/x64 (64-bit)\

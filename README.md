@@ -23,7 +23,7 @@ Life has evolved different strategies to take advantage of seasonal constraints 
 
 ## Workflow
 
-![](https://github.com/gabrielbouleau/seasonal-switches-lemming/blob/master/workflow.png?raw=true)
+![](../blob/workflow.png)
 
 ## data file description
 

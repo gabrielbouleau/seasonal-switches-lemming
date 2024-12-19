@@ -68,10 +68,9 @@ jaeger <- read.delim("data_raw/nordicanad_ltja_nesting_summary_data_2004_2019_ga
 #   Weasel observations   #
 #-------------------------#
 # Load weasel data, threshold presence at a Index of more than 0.5
-weasel <- read.csv2("data_raw/ST_hermines_1991-2019.csv")[, -1] %>% 
-  add_column(weasel = ifelse(.$Index >= 0.5, 1, 0)) %>% 
+weasel <- read.csv2("data_raw/Herm_index_IC95_point.csv") %>% 
+  add_column(weasel = ifelse(.$Mean >= 0.5, 1, 0)) %>% 
   mutate(Season = "S", period = "P1")
-
 
 #---------------------------------#
 #   Presence-absence dataframe    #

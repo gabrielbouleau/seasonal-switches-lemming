@@ -1,0 +1,9 @@
+specie,season,mass_g,Q_B,d,Lemming_g,comment
+owl,Hsummer,2169,"56,9","0,83","39,6",Q_B adjusted for time on the island
+jaeger,Hsummer,298,"332,8","0,65","39,6",Q_B adjusted for time on the island
+weasel,Hsummer,134,"131,7",1,"39,6",Allometric Q_B adjusted for raising young
+weasel,Lsummer,134,"131,7","0,94","39,6",Allometric Q_B adjusted for raising young
+weasel,winter,134,"108,7",1,"39,6",Allometric Q_B 
+arctic fox,Lsummer,3300,"56,4","0,37","39,6",For all fox reconsider d as from goose colony
+arctic fox,winter,3300,"56,4","0,47","39,6","Diet = mean of peak and crash, take account for marine ressources / Energetic need = low summer to take into account increase in thermoregulation cost"
+arctic fox,Hsummer,3300,"75,7","0,57","39,6","Summer Q_B + (SQ_B * (8/35) * 1,5)"

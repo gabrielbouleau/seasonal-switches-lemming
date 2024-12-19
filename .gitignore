@@ -39,7 +39,6 @@ vignettes/*.pdf
 .Renviron
 
 # Raw data folder
-data_raw/
 svg/
 results/
 

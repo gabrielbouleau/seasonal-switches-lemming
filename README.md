@@ -1,6 +1,6 @@
 # seasonal-switches-lemming
 
-This README file contain the information required to reproduce the result of the paper "SIMPLE SEASONAL SWITCHES IN FOOD WEB COMPOSITION UNVEIL THE COMPLEXITY OF AN ARCTIC PREDATOR-PREY SYSTEM" This paper is available here [Link to publication].
+This README file contain the information required to reproduce the result of the paper "Simple seasonal switches in food web composition unveil the complexity of an Arctic predatory-prey system" This paper is available here [Link to publication].
 
 ## Authors
 
@@ -22,6 +22,8 @@ Life has evolved different strategies to take advantage of seasonal constraints 
 
 ## Code authorship and maintenance
 
+Gabriel Bergeron is the main author of the codes contained in this repository. Gabriel Bergeron is responsible for code maintenance.
+
 ## Workflow
 
 The analysis is divided in five main script which clean the data, run models and save the formated data and models in RDS objects. Six other scripts generates the data from the RDS objects.
@@ -40,7 +42,7 @@ All plots in the supplementary are grouped in the same script : figure_all_suppl
 
 ![Analysis workflow](workflow.png)
 
-## Folders information
+### Folders information
 
 Here is a list of the folders in this repository and what they contain:
 
@@ -49,7 +51,7 @@ Here is a list of the folders in this repository and what they contain:
 
 Not included in the repository are the .svg files of the icons founds in figure 1. These icons were created by the user with the Inkscape software. Files can be made available by contacting the authors.
 
-## data file description
+### Data file description
 
 Listed here is a description of each column of each data file. For more details on Nordiciand's data collection protocols, go to this [website](https://nordicana.cen.ulaval.ca/)
 
@@ -101,8 +103,11 @@ Listed here is a description of each column of each data file. For more details 
 8. lemming density in the mesic habitat (ind/ha)
 9. notes
 
-**ST_hermines_1991_2019.csv**
-TBD
+**Herm_index_IC95_point.csv**
+1. study year
+2. 95% upper interval of the ermine index
+3. 95% lower interval of the ermine index
+4. mean value of the ermine index
 
 **nordicanad_arctic_and_red_fox_den_monitoring_data_1993-2019_berteaux.txt**
 1. Study year (Year)
@@ -145,6 +150,6 @@ TBD
 | purrr_1.0.2            | readr_2.1.5     | tidyr_1.3.1     | tibble_3.2.1  | ggplot2_3.5.1  | tidyverse_2.0.0 |
 | data.table_1.16.0      |                 |                 |               |                |                 |
 
-R version 4.3.2 (2023-10-31 ucrt)\
+R version 4.4.1 (2024-06-14 ucrt)\
 Platform: x86_64-w64-mingw32/x64 (64-bit)\
 Running under: Windows 11 x64 (build 22621)\

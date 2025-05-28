@@ -200,7 +200,7 @@ pheno <- pheno[, c(5,6)]
 #-------------------#
 
 plot(NULL, xlim=c(1, 10), ylim=c(0.1 , 110), xaxt = "n", yaxt = "n",
-     xlab = "Predator assemblages", ylab = "$R_i$ values", log = "y", cex.lab = 2)
+     xlab = "Predator assemblages", ylab = "$R_{I+1}$ values", log = "y", cex.lab = 2)
 
 # Line of R2 = 1, below this point cycle happens
 abline(h = 1, lty = 2)

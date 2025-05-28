@@ -149,9 +149,9 @@ plot(pred0, type = "l", bty = "L",
      yaxt = "n", xaxt = "n",
      ylab =""  , xlab = "",
      lwd = 7, axes = FALSE, 
-     col = color[3], ylim = c(0,1))
+     col = color[2], ylim = c(0,1))
 
-lines(pred1, lwd = 7, col = color[2])
+lines(pred1, lwd = 7, col = color[1])
 
 segments(25, y0 = 0, y1 = 1, lty = 2, lwd = 6)
 text("$L^*$", x = 29, y = 0.5, cex = 5)
@@ -242,8 +242,8 @@ mtext("States and switches", adj = 2.1, line = 4, cex = 4)
 plot.new()
 
 
-plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[3], lwd = 8)
-plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
+plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
+plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[1], lwd = 8)
 
 
 iArrows(x1 = 0.3, y1 = 0.85, x2 = 0.7, y2 = 0.85,
@@ -478,12 +478,12 @@ tikzAnnotate(c('\\definecolor{winter}{RGB}{33,176,192}', # Define color for the 
 
                # Fist formula in tex synthax for color insertion
                '\\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1348.12,628.18)',
-               '{$R_1 = e^{\\textcolor{low_summer}{r_2} (1-q)} e^{\\textcolor{winter}{r_1}q}$};',
+               '{$R_1 = e^{\\textcolor{low_summer}{r_2} \\tau } e^{\\textcolor{winter}{r_1} (1-\\tau)}$};',
                # \textcolor allow to color part of the text. Double \ for escape
 
                # Second formula
                '\\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1800.03,870.39)',
-               '{$R_2 = e^{\\textcolor{high_summer}{r_3} (1-q)} e^{\\textcolor{winter}{r_1}q}$};')
+               '{$R_2 = e^{\\textcolor{high_summer}{r_3} \\tau } e^{\\textcolor{winter}{r_1} (1- \\tau )}$};')
 )
 
 

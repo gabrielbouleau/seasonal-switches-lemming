@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.12.6 on 2024-12-18 14:58:33
+% Created by tikzDevice version 0.12.6 on 2025-05-20 10:11:12
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt]{article}
 \usepackage{tikz}
@@ -10,9 +10,7 @@
 \setlength\PreviewBorder{0pt}
 \begin{document}
 
-
-\end{document}
-}[x=1pt,y=1pt]
+\begin{tikzpicture}[x=1pt,y=1pt]
 \definecolor{fillColor}{RGB}{255,255,255}
 \path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (2023.56,1300.86);
 \begin{scope}
@@ -1012,7 +1010,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (673.99,497.77) rectangle (1115.93,748.44);
-\definecolor{drawColor}{RGB}{33,176,192}
+\definecolor{drawColor}{RGB}{218,53,47}
 
 \path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round] (690.36,507.06) --
 	(698.71,507.06) --
@@ -1042,7 +1040,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (673.99,497.77) rectangle (1115.93,748.44);
-\definecolor{drawColor}{RGB}{218,53,47}
+\definecolor{drawColor}{RGB}{224,150,0}
 
 \path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round] (899.14,739.16) --
 	(907.49,739.16) --
@@ -1111,10 +1109,8 @@
 
 \node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  3.00] at (551.03,773.78) {E)};
 \end{scope}
-\end{tikzpicture}
-
-\end{document}
-8.71) rectangle (561.53,369.47);
+\begin{scope}
+\path[clip] ( 16.63,  8.71) rectangle (561.53,369.47);
 \definecolor{drawColor}{RGB}{33,176,192}
 
 \path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round] (232.32,189.09) --
@@ -18341,7 +18337,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (594.79,  8.71) rectangle (1139.69,369.47);
-\definecolor{drawColor}{RGB}{33,176,192}
+\definecolor{drawColor}{RGB}{218,53,47}
 
 \path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round] (810.48,189.09) --
 	(810.28,195.43) --
@@ -18444,7 +18440,7 @@
 	(809.68,176.44) --
 	(810.28,182.75) --
 	cycle;
-\definecolor{drawColor}{RGB}{218,53,47}
+\definecolor{drawColor}{RGB}{224,150,0}
 
 \path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round] (1125.81,189.09) --
 	(1125.61,195.43) --
@@ -32758,10 +32754,8 @@
 
 \node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  3.00] at (553.70,339.37) {F)};
 \end{scope}
-\end{tikzpicture}
-
-\end{document}
-95.42) rectangle (1983.17,1005.44);
+\begin{scope}
+\path[clip] (1212.55,295.42) rectangle (1983.17,1005.44);
 \definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round] (1241.09,339.01) --
@@ -33735,9 +33729,9 @@
 \definecolor{low_summer}{RGB}{218,53,47}
 \definecolor{high_summer}{RGB}{224,150,0}
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1348.12,628.18)
-{$R_1 = e^{\textcolor{low_summer}{r_2} (1-q)} e^{\textcolor{winter}{r_1}q}$};
+{$R_1 = e^{\textcolor{low_summer}{r_2} \tau } e^{\textcolor{winter}{r_1} (1-\tau)}$};
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1800.03,870.39)
-{$R_2 = e^{\textcolor{high_summer}{r_3} (1-q)} e^{\textcolor{winter}{r_1}q}$};
+{$R_2 = e^{\textcolor{high_summer}{r_3} \tau } e^{\textcolor{winter}{r_1} (1- \tau )}$};
 \end{scope}
 \begin{scope}
 \path[clip] (1295.87,454.85) rectangle (1375.23,520.80);

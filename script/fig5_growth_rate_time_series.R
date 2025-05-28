@@ -181,7 +181,7 @@ abline(h = 0, lty = 2, col = "grey", lwd = 2.5)
 points(meca_fit ~ year, data = predator, col = color[3], type = "b", lwd = 1.2, pch = 0)
 
 polygon(x = c(predator$year, rev(predator$year)),
-        y = c(predator$ meca_upr, rev(predator$meca_lwr)), 
+        y = c(predator$meca_upr, rev(predator$meca_lwr)), 
         col = adjustcolor(color[3], alpha = 0.20), border = NA)
 
 points(pheno_fit_link ~ year, data = predator, col = color[4], type = "b", lwd = 1.2, pch = 1)

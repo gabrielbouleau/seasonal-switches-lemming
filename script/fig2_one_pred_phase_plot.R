@@ -72,7 +72,7 @@ for(i in 2:length(k)){
 lines(x = c(x1, x2), y = c(y1, y2), lwd = 4)
 
 # Illustrate the cycle dynamic at specific k value
-k_vector <- c(5, 3, 2.5, 2, 1/2, 1/2.5, 1/3, 1/5)
+k_vector <- c(5, 10/3, 2.5, 2, 1/2, 1/2.5, 1/(10/3), 1/5)
 
 # Add points at k value where the curves cross
 diagonal <- matrix(rep(NA, 2*length(k_vector)), ncol = 2)
@@ -81,7 +81,10 @@ for (i in 1:length(k_vector)) {
 }
 points(diagonal[,1], diagonal[, 2], pch = 19, cex = 1.5, col = color)
 
-
+# labels the diagonals
+text(x = c(3.8, 8, 75, 80, 80), 
+     y = c(0.011, 0.011, 0.011, 0.095, 0.205), 
+     labels = c("$k=3$", "$k=2$", "$k=1$", "$k=1/2$", "$k=1/3$"))
 
 #---------------------------------------#
 # Time series at different k values     #
@@ -90,7 +93,7 @@ points(diagonal[,1], diagonal[, 2], pch = 19, cex = 1.5, col = color)
 # Plot cycle dynamic at different k value
 par(mar = c(1.1,1.1,1.5,0.5))
 
-k_vector_name <- c(5, 3, 2.5, 2, "1/2", "1/2.5", "1/3", "1/5")
+k_vector_name <- c(5, "$3.\\overline{3}$", 2.5, 2, "1/2", "1/2.5", "$1/3.\\overline{3}$", "1/5")
 
 for (i in 1:length(k_vector)) {
   

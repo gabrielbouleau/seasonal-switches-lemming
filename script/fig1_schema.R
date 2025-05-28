@@ -149,9 +149,9 @@ plot(pred0, type = "l", bty = "L",
      yaxt = "n", xaxt = "n",
      ylab =""  , xlab = "",
      lwd = 7, axes = FALSE, 
-     col = color[2], ylim = c(0,1))
+     col = color[1], ylim = c(0,1))
 
-lines(pred1, lwd = 7, col = color[1])
+lines(pred1, lwd = 7, col = color[2])
 
 segments(25, y0 = 0, y1 = 1, lty = 2, lwd = 6)
 text("$L^*$", x = 29, y = 0.5, cex = 5)
@@ -242,8 +242,8 @@ mtext("States and switches", adj = 2.1, line = 4, cex = 4)
 plot.new()
 
 
-plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
-plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[1], lwd = 8)
+plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[1], lwd = 8)
+plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
 
 
 iArrows(x1 = 0.3, y1 = 0.85, x2 = 0.7, y2 = 0.85,
@@ -438,8 +438,8 @@ abline(h = 2.3, lty = 2, lwd = 5)
 
 
 lines(winter, col = color[3], lwd = 4)
-lines(summer.low, col = color[2], lwd = 4)
-lines(summer.high, col = color[1], lwd = 4)
+lines(summer.low, col = color[1], lwd = 4)
+lines(summer.high, col = color[2], lwd = 4)
 
 
 transition <- out[which(out$time %in% break.pt), ]
@@ -447,9 +447,9 @@ transition <- out[which(out$time %in% break.pt), ]
 arrows(transition[4, 1], 0.1, transition[5, 1], 0.1, lwd = 4, angle = 90, code = 3, length = 0.1)
 
 points(transition, pch = 19, cex = 3, 
-       col = c(rep(color[2:3], 3),
-               color[c(1,3)],
-               rep(color[2:3], 2)))
+       col = c(rep(color[c(1,3)], 3),
+               color[c(2,3)],
+               rep(color[c(1,3)], 2)))
 
 
 lines(x = c(1.5, 2.5), y = c(1.1, 0.6581202), lwd = 5, col = "grey")
@@ -461,7 +461,7 @@ plotrix::draw.circle(5.5, 2.5, 0.6, lwd = 7, col = "white", border = "grey")
 
 
 text(labels = c("$r_1$ = winter", "$r_2$ = low summer", "$r_3$ = high summer"),
-     x = rep(1, 3), y = c(3.8, 3.5, 3.2), col = color[3:1], cex = 5, pos = 4)
+     x = rep(1, 3), y = c(3.8, 3.5, 3.2), col = color[c(3,1,2)], cex = 5, pos = 4)
 
 text("$q$", x = 2.625, y = 0.25, cex = 4)
 
@@ -473,8 +473,8 @@ text("$q$", x = 2.625, y = 0.25, cex = 4)
 
 
 tikzAnnotate(c('\\definecolor{winter}{RGB}{33,176,192}', # Define color for the color insertion
-               '\\definecolor{low_summer}{RGB}{218,53,47}',
-               '\\definecolor{high_summer}{RGB}{224,150,0}',
+               '\\definecolor{low_summer}{RGB}{224,150,0}',
+               '\\definecolor{high_summer}{RGB}{218,53,47}',
 
                # Fist formula in tex synthax for color insertion
                '\\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1348.12,628.18)',

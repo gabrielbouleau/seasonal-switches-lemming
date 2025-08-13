@@ -163,34 +163,31 @@ layout(matrix(c(1,1,1,2,
 
 par(mar = c(6.1, 6.1, 4.1, 0), mgp = c(3, 1.5, 0))
 
-plot(exp(Growth) ~ year, data = Growth[-nrow(Growth),], 
+plot(Growth ~ year, data = Growth[-nrow(Growth),], 
      pch = 19, type = "b", 
      ylab = NA, xlab = NA, 
      lwd = 2, 
-     ylim = exp(c(-4.5, 5)),
-     xaxt = "n", yaxt = "n",
-     log = 'y')
-
-yticks <- c(0.01, 0.1, 1, 10, 100)
+     ylim = c(-4.5, 5),
+     xaxt = "n", yaxt = "n")
 
 axis(1, at = seq(1993, 2020, 2), cex.axis = 1.5)
-axis(2, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)), cex.axis = 1.5)
+axis(2, at = c(-4, -2, 0, 2, 4), cex.axis = 1.5)
 
 mtext("Exponential growth rate", 2, cex = 2, line = 3.5)
 mtext("Year", 1, cex = 2, line = 4)
 
-abline(h = 1, lty = 2, col = "grey", lwd = 2.5)
+abline(h = 0, lty = 2, col = "grey", lwd = 2.5)
 
-points(exp(meca_fit) ~ year, data = predator, col = color[3], type = "b", lwd = 1.2, pch = 0)
+points(meca_fit ~ year, data = predator, col = color[3], type = "b", lwd = 1.2, pch = 0)
 
 polygon(x = c(predator$year, rev(predator$year)),
-        y = c(exp(predator$meca_upr), rev(exp(predator$meca_lwr))), 
+        y = c(predator$meca_upr, rev(predator$meca_lwr)), 
         col = adjustcolor(color[3], alpha = 0.20), border = NA)
 
-points(exp(pheno_fit_link) ~ year, data = predator, col = color[4], type = "b", lwd = 1.2, pch = 1)
+points(pheno_fit_link ~ year, data = predator, col = color[4], type = "b", lwd = 1.2, pch = 1)
 
 polygon(x = c(predator$year, rev(predator$year)),
-        y = c(exp(predator$pheno_upr), rev(exp(predator$pheno_lwr))), 
+        y = c(predator$ pheno_upr, rev(predator$pheno_lwr)), 
         col = adjustcolor(color[4], alpha = 0.20), border = NA)
 
 legend("bottom", legend = c( "Empirical", "Mechanistic", "Phenomenologic"), ncol = 3, cex = 2,
@@ -224,65 +221,57 @@ col.phe <- col.transp(color[4], n = (nrow(predator) - 1))
 # Mechanistic phase plot
 par(mar = c(0, 7.1, 4.1, 4.1))
 
-plot(NA,
-     xlim = exp(c(-5, 5)), ylim = exp(c(-5, 5)),
-     xlab = NA, ylab = NA, xaxt = "n", yaxt = 'n', cex.axis = 1.2, log = 'xy')
+plot(10,
+     xlim = c(-5, 5), ylim = c(-5, 5),
+     xlab = NA, ylab = NA, xaxt = "n", cex.axis = 1.2)
 
-axis(2, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)))
+abline(h = 0, v = 0, lty = 2, col = "grey")
 
-abline(h = 1, v = 1, lty = 2, col = "grey")
-
-segments(x0 = exp(head(predator$meca_fit[-nrow(predator)], -1)),
-         y0 = exp(head(predator$meca_fit[-1], -1)),
-         x1 = exp(tail(predator$meca_fit[-nrow(predator)], -1)),
-         y1 = exp(tail(predator$meca_fit[-1], -1)),
+segments(x0 = head(predator$meca_fit[-nrow(predator)], -1),
+         y0 = head(predator$meca_fit[-1], -1),
+         x1 = tail(predator$meca_fit[-nrow(predator)], -1),
+         y1 = tail(predator$meca_fit[-1], -1),
          lwd = 2, col = col.mec)
 
 # points(log(predator$meca_fit[-1]) ~ log(predator$meca_fit[-nrow(predator)]), cex = 3, col = "white", pch = 19)
-points(exp(predator$meca_fit[-1]) ~ exp(predator$meca_fit[-nrow(predator)]), cex = 1.5, col = col.mec, pch = 19)
+points(predator$meca_fit[-1] ~ predator$meca_fit[-nrow(predator)], cex = 1.5, col = col.mec, pch = 19)
 
 
 # Empirical phase plot
 par(mar = c(2, 7.1, 2, 4.1))
 
-plot(NA,
-     xlim = exp(c(-5, 5)), ylim = exp(c(-5, 5)),
-     xlab = NA, xaxt = "n", yaxt = 'n', cex.axis = 1.2, log = 'xy',
-     ylab = "Growth rate\nyear $t+1$")
+plot(10,
+     xlim = c(-5, 5), ylim = c(-5, 5),
+     xlab = NA, ylab = "Growth rate\nyear $t+1$", xaxt = "n", cex.axis = 1.2, cex.lab = 2)
 
-axis(2, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)))
+abline(h = 0, v = 0, lty = 2, col = "grey")
 
-abline(h = 1, v = 1, lty = 2, col = "grey")
-
-segments(x0 = exp(head(predator$Growth[-nrow(predator)], -1)),
-         y0 = exp(head(predator$Growth[-1], -1)),
-         x1 = exp(tail(predator$Growth[-nrow(predator)], -1)),
-         y1 = exp(tail(predator$Growth[-1], -1)),
+segments(x0 = head(predator$Growth[-nrow(predator)], -1),
+         y0 = head(predator$Growth[-1], -1),
+         x1 = tail(predator$Growth[-nrow(predator)], -1),
+         y1 = tail(predator$Growth[-1], -1),
          lwd = 2, col = col.emp)
 
 # points(predator$Growth[-1] ~ predator$Growth[-nrow(predator)], cex = 3, col = "white", pch = 19)
-points(exp(predator$Growth[-1]) ~ exp(predator$Growth[-nrow(predator)]), cex = 1.5, col = col.emp, pch = 19)
+points(predator$Growth[-1] ~ predator$Growth[-nrow(predator)], cex = 1.5, col = col.emp, pch = 19)
 
 
 # Phenomenologic phase plot
 par(mar = c(4.1, 7.1, 0, 4.1))
 
-plot(NA,
-     xlim = exp(c(-5, 5)), ylim = exp(c(-5, 5)),
-     xlab = "year $t$", ylab = NA, xaxt = "n", yaxt = 'n', cex.axis = 1.2, log = 'xy')
+plot(10,
+     xlim = c(-5, 5), ylim = c(-5, 5),
+     xlab = "year $t$", ylab = NA, cex.axis = 1.2, cex.lab = 2)
 
-axis(1, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)))
-axis(2, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)))
+abline(h = 0, v = 0, lty = 2, col = "grey")
 
-abline(h = 1, v = 1, lty = 2, col = "grey")
-
-segments(x0 = exp(head(predator$pheno_fit_link[-nrow(predator)], -1)),
-         y0 = exp(head(predator$pheno_fit_link[-1], -1)),
-         x1 = exp(tail(predator$pheno_fit_link[-nrow(predator)], -1)),
-         y1 = exp(tail(predator$pheno_fit_link[-1], -1)),
+segments(x0 = head(predator$pheno_fit_link[-nrow(predator)], -1),
+         y0 = head(predator$pheno_fit_link[-1], -1),
+         x1 = tail(predator$pheno_fit_link[-nrow(predator)], -1),
+         y1 = tail(predator$pheno_fit_link[-1], -1),
          lwd = 2, col = col.phe)
 
 # points(log(predator$Growth_pheno[-1]) ~ log(predator$Growth_pheno[-nrow(predator)]), cex = 3, col = "white", pch = 19)
-points(exp(predator$pheno_fit_link[-1]) ~ exp(predator$pheno_fit_link[-nrow(predator)]), cex = 1.5, col = col.phe, pch = 19)
+points(predator$pheno_fit_link[-1] ~ predator$pheno_fit_link[-nrow(predator)], cex = 1.5, col = col.phe, pch = 19)
 
 dev.off()

@@ -920,35 +920,37 @@ tikz("FigS6_Growth_by_group.tex", width = 7, height = 7, standAlone = TRUE)
 
 par(mar = c(7.1, 6.1, 4.1, 2.1), lend=1)
 
-boxplot(meca_fit ~ pred_class, data = predator, border = NA,
-        ylab = NA, xlab = NA, ylim = c(-3.5, 5.5), lwd = 2, cex.axis = 1.5)
+boxplot(meca_fit ~ pred_class, data = predator, border = NA, log = 'y', yaxt = 'n',
+        ylab = NA, xlab = NA, ylim = exp(c(-3.5, 5.5)), lwd = 2, cex.axis = 1.5)
 
-mtext("Exponential growth rate", 2, cex = 2, line = 3.5)
+yticks <- c(0.01, 0.1, 1, 10, 100)
+
+axis(2, at = yticks, labels = sub("\\.?0+$", "", format(yticks, scientific = FALSE)), cex.axis = 1.5)
+
+mtext("Annual growth rate", 2, cex = 2, line = 3.5)
 mtext("Predation assemblages", 1, cex = 2, line = 4)
-
-# boxplot(pheno_fit_link ~ pred_class, data = predator, border = color[4], lwd = 2, cex.axis = 1.5, add = TRUE)
 
 for (i in 1:nrow(pred_var)) {
   
-  polygon(x = c(i, i+0.4, i+0.4, i), y = c(rep(pred_var[i, "pheno_lwr"], 2),  rep(pred_var[i, "pheno_upr"], 2)),
+  polygon(x = c(i, i+0.4, i+0.4, i), y = exp(c(rep(pred_var[i, "pheno_lwr"], 2),  rep(pred_var[i, "pheno_upr"], 2))),
           col = adjustcolor(color[4], alpha = 0.5), border = NA)
-  segments(x0 = i, x1 = i+0.4, y0 = pred_var[i, "pheno_fit_link"],
+  segments(x0 = i, x1 = i+0.4, y0 = exp(pred_var[i, "pheno_fit_link"]),
            col = adjustcolor(color[4]), lwd = 6)
   
-  polygon(x = c(i-0.4, i, i, i-0.4), y = c(rep(pred_var[i, "meca_lwr"], 2),  rep(pred_var[i, "meca_upr"], 2)),
+  polygon(x = c(i-0.4, i, i, i-0.4), y = exp(c(rep(pred_var[i, "meca_lwr"], 2),  rep(pred_var[i, "meca_upr"], 2))),
           col = adjustcolor(color[3], alpha = 0.5), border = NA)
-  segments(x0 = i, x1 = i-0.4, y0 = pred_var[i, "meca_fit"],
+  segments(x0 = i, x1 = i-0.4, y0 = exp(pred_var[i, "meca_fit"]),
            col = adjustcolor(color[3]), lwd = 6)
   
   
 } 
 
 
-legend(5.8, 5.5, legend = c("Mechanistic", "Phenomenological", "Observed values"), pch = c(NA, NA, 19), 
+legend(5.8, exp(5.5), legend = c("Mechanistic", "Phenomenological", "Observed values"), pch = c(NA, NA, 19), 
        lwd = c(2, 2, NA), box.lty = 0, col = c(color[c(3,4)], "black"), cex = 1.2)
 
-abline(h = 0, lty = 2, col = "grey")
+abline(h = 1, lty = 2, col = "grey")
 
-points(Growth ~ pred_class, data = predator, pch = 19)
+points(exp(Growth) ~ pred_class, data = predator, pch = 19)
 
 dev.off()

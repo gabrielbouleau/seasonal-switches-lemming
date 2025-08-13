@@ -17,9 +17,9 @@ color <- rgb(color[,1], color[, 2], color[, 3], maxColorValue = 255)[4:7]
 
 tikz("fig1_schema.tex", height = 18, width = 28, standAlone = TRUE)
 
-layout(matrix(c(1,1,2,2,7,7,7,
-                3,3,4,4,7,7,7,
-                5,5,6,6,7,7,7), ncol = 7, byrow = TRUE))
+layout(matrix(c(1,1,2,2,6,6,6,
+                3,3,4,4,6,6,6,
+                5,5,5,5,6,6,6), ncol = 7, byrow = TRUE))
 
 par(mar = c(8.1, 12.1, 15, 5.1), mgp = c(3, 2, 0))
 
@@ -36,7 +36,7 @@ k <- 3
   
 migrant_summer <- c(L / (1 + exp(-k * (x - xo))), L / (1 + exp(-k * (-x - xo)))) 
 
-migrant_continuous <- c(rep(0, 100), migrant_summer, rep(0, 100), migrant_summer)
+migrant_continuous <- c(migrant_summer, rep(0, 100), migrant_summer, rep(0, 100))
 
 
 plot(migrant_continuous, type = "l", bty = "L",
@@ -47,17 +47,17 @@ plot(migrant_continuous, type = "l", bty = "L",
 axis(1, lwd.ticks = 0, labels = NA, at = c(-15:450), lwd = 3)
 axis(2, lwd.ticks = 0, labels = NA, at = c(-1:4), lwd = 3)
 
-axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(0:110), col = color[3], line = 1)
-axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(190:310), col = color[3], line = 1)
+axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(90:210), col = color[3], line = 1)
+axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(290:400), col = color[3], line = 1)
 
-axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(120:180), col = color[2], line = 1)
-axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(320:380), col = color[2], line = 1)
+axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(20:80), col = color[2], line = 1)
+axis(1, lwd = 7, labels = NA, lwd.ticks = 0, at = c(220:280), col = color[2], line = 1)
 
 
 mtext("Migrant density", side = 2, line = 3, cex = 3, at = 0.5)
 mtext("Time", side = 1, line = 7, cex = 3)
 
-mtext(c("W", "S", "W", "S"), side = 1, line = 3, cex = 2, at = c(55, 150, 250, 350))
+mtext(c("S", "W", "S", "W"), side = 1, line = 3, cex = 2, at = c(50, 150, 250, 350))
 
 mtext("A)", adj = -0.2, line = 3, cex = 3)
 
@@ -114,20 +114,22 @@ plot(mig1, xlim = c(0, 400), ylim = c(0, 1),
 
 lines(mig2, lwd = 7, col = color[2])
 
-segments(x0 = 126, y0 = 0, y1 = 1, lty = 2, lwd = 6)
-segments(x0 = 175, y0 = 0, y1 = 1, lty = 2, lwd = 6)
-segments(x0 = 326, y0 = 0, y1 = 1, lty = 2, lwd = 6)
-segments(x0 = 376, y0 = 0, y1 = 1, lty = 2, lwd = 6)
+segments(x0 = 26, y0 = 0, y1 = 1, lty = 2, lwd = 6)
+segments(x0 = 76, y0 = 0, y1 = 1, lty = 2, lwd = 6)
+segments(x0 = 226, y0 = 0, y1 = 1, lty = 2, lwd = 6)
+segments(x0 = 276, y0 = 0, y1 = 1, lty = 2, lwd = 6)
 
-points(x = c(126, 175, 326, 376), y = c(0, 1, 0, 1), cex = 3, pch = 19)
-points(x = c(126, 175, 326, 376), y = c(1, 0, 1, 0), cex = 2.5, pch = 19, col = "white")
-points(x = c(126, 175, 326, 376), y = c(1, 0, 1, 0), cex = 3, pch = 1)
+points(x = c(26, 76, 226, 276), y = c(0, 1, 0, 1), cex = 3, pch = 19)
+points(x = c(26, 76, 226, 276), y = c(1, 0, 1, 0), cex = 2.5, pch = 19, col = "white")
+points(x = c(26, 76, 226, 276), y = c(1, 0, 1, 0), cex = 3, pch = 1)
 
 axis(1, lwd.ticks = 0, labels = NA, at = c(-15:450), lwd = 3)
 axis(2, lwd.ticks = 0, labels = NA, at = c(-1:4), lwd = 3)
 
 mtext("Migrant density", side = 2, line = 3, cex = 3, at = 0.5)
-mtext("Time", side = 1, line = 4, cex = 3)
+mtext("Time", side = 1, line = 7, cex = 3)
+
+mtext(c("$0$", "$\\tau$", "$1$", "$1+\\tau$"), side = 1, line = 3, cex = 2.5, at = c(26, 76, 226, 276))
 
 mtext("B)", adj = -0.2, line = 3, cex = 3)
 
@@ -197,83 +199,63 @@ par(mar = c(1.1, 2.1, 8.1, 2.1))
 # Create left plot
 plot.new()
 
-
-plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[3], lwd = 8)
-plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
+plotrix::draw.circle(x = 0.5000, y = 0.4, radius = 0.1, border = color[3], lwd = 8)
+plotrix::draw.circle(x = 0.1875, y = 0.4, radius = 0.1, border = color[1], lwd = 8)
+plotrix::draw.circle(x = 0.8125, y = 0.4, radius = 0.1, border = color[2], lwd = 8)
 
 
 iArrows <- igraph:::igraph.Arrows
 
 
-iArrows(x1 = 0.3, y1 = 0.85, x2 = 0.7, y2 = 0.85,
-        h.lwd = 4, sh.lwd = 4, curve = 0.5,
+iArrows(x1 = 0.25, y1 = 0.72, x2 = 0.45, y2 = 0.72,
+        h.lwd = 4, sh.lwd = 4, curve = 1,
         width = 4, size = 1)
 
 
-iArrows(x1 = 0.7, y1 = 0.15, x2 = 0.3, y2 = 0.15,
-        h.lwd = 4, sh.lwd = 4, curve = 0.5,
+iArrows(x1 = 0.45, y1 = 0.09, x2 = 0.25, y2 = 0.09,
+        h.lwd = 4, sh.lwd = 4, curve = 1,
+        width = 4, size = 1)
+
+iArrows(x1 = 0.55, y1 = 0.72, x2 = 0.75, y2 = 0.72,
+        h.lwd = 4, sh.lwd = 4, curve = 1,
+        width = 4, size = 1)
+
+iArrows(x1 = 0.75, y1 = 0.09, x2 = 0.55, y2 = 0.09,
+        h.lwd = 4, sh.lwd = 4, curve = 1,
         width = 4, size = 1)
 
 
-text("Summer", x = 0.82, y = 0.95, cex = 4)
-text("Winter", x = 0.18, y = 0.95, cex = 4)
+text("Summer", x = 0.82, y = 0.98, cex = 4)
+text("Summer", x = 0.18, y = 0.98, cex = 4)
+text("Winter", x = 0.5, y = 0.98, cex = 4)
 
+text("$\\geq L^*$", x = 0.82, y = 0.85, cex = 5)
+text("$< L^*$", x = 0.18, y = 0.85, cex = 5)
 
 # Plot svg
-grid.picture(SVGlemming,   x = 0.24, y = 0.11,
-             width = grid::unit(1.21, "in"), height = grid::unit(1.1, "in"))
+grid.picture(SVGlemming,  x = 0.14, y = 0.08,
+             width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
-grid.picture(SVGlemming,  x = 0.085, y = 0.11,
-             width = grid::unit(1.21, "in"), height = grid::unit(1.1, "in"))
+grid.picture(SVGlemming,   x = 0.3, y = 0.08,
+             width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
-
-grid.picture(SVGowl_dashed,  x = 0.055, y = 0.17,
-             width = grid::unit(2.2, "in"), height = grid::unit(2.2, "in"))
-
-grid.picture(SVGowl_black,  x = 0.21, y = 0.17,
-             width = grid::unit(2.2, "in"), height = grid::unit(2.2, "in"))
-
-mtext("C)", adj = -0.01, line = -4, cex = 3)
-
-mtext("States and switches", adj = 2.1, line = 4, cex = 4)
+grid.picture(SVGlemming,  x = 0.46, y = 0.08,
+             width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
 
-# Create right plot
-plot.new()
+grid.picture(SVGowl_dashed,  x = 0.12, y = 0.14,
+             width = grid::unit(2.5, "in"), height = grid::unit(3, "in"))
 
+grid.picture(SVGowl_dashed,  x = 0.28, y = 0.14,
+             width = grid::unit(2.5, "in"), height = grid::unit(2.9, "in"))
 
-plotrix::draw.circle(x = 0.1875, y = 0.5, radius = 0.2, border = color[1], lwd = 8)
-plotrix::draw.circle(x = 0.8125, y = 0.5, radius = 0.2, border = color[2], lwd = 8)
+grid.picture(SVGowl_black,  x = 0.44, y = 0.14,
+             width = grid::unit(2.5, "in"), height = grid::unit(2.8, "in"))
 
+mtext("C)", adj = 0, line = -4, cex = 3)
 
-iArrows(x1 = 0.3, y1 = 0.85, x2 = 0.7, y2 = 0.85,
-        h.lwd = 4, sh.lwd = 4, curve = 0.5,
-        width = 4, size = 1)
+mtext("States and switches", adj = 0.5, line = 4, cex = 4)
 
-
-iArrows(x1 = 0.7, y1 = 0.15, x2 = 0.3, y2 = 0.15,
-        h.lwd = 4, sh.lwd = 4, curve = 0.5,
-        width = 4, size = 1)
-
-
-# Plot svg
-text("$\\geq L^*$", x = 0.82, y = 0.95, cex = 5)
-text("$< L^*$", x = 0.18, y = 0.95, cex = 5)
-
-
-grid.picture(SVGlemming,   x = 0.37, y = 0.11,
-             width = grid::unit(1.21, "in"), height = grid::unit(1.1, "in"))
-
-grid.picture(SVGlemming,  x = 0.525, y = 0.11,
-             width = grid::unit(1.21, "in"), height = grid::unit(1.1, "in"))
-
-grid.picture(SVGfox,  x = 0.345, y = 0.16,
-             width = grid::unit(4, "in"), height = grid::unit(1.25, "in"))
-
-grid.picture(SVGfox_family,  x = 0.5, y = 0.16,
-             width = grid::unit(4, "in"), height = grid::unit(1.25, "in"))
-
-mtext("F)", adj = -0.08, line = -4, cex = 3)
 
 
 #------------------------#
@@ -463,7 +445,7 @@ plotrix::draw.circle(5.5, 2.5, 0.6, lwd = 7, col = "white", border = "grey")
 text(labels = c("$r_1$ = winter", "$r_2$ = low summer", "$r_3$ = high summer"),
      x = rep(1, 3), y = c(3.8, 3.5, 3.2), col = color[c(3,1,2)], cex = 5, pos = 4)
 
-text("$q$", x = 2.625, y = 0.25, cex = 4)
+text("$1-\\tau$", x = 2.625, y = 0.25, cex = 4)
 
 
 # # Don't delete lines under this
@@ -500,7 +482,7 @@ grid.picture(SVGlemming_grey,  x = 0.89, y = 0.56,
 grid.picture(SVGjaeger_grey,  x = 0.87, y = 0.585,
              width = grid::unit(2.34, "in"), height = grid::unit(1.62, "in"))
 
-mtext("G)", adj = -0.1, line = 5, cex = 3)
+mtext("F)", adj = -0.1, line = 5, cex = 3)
 
 
 dev.off()

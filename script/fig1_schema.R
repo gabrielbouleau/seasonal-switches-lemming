@@ -449,8 +449,8 @@ text("$1-\\tau$", x = 2.625, y = 0.25, cex = 4)
 
 
 # # Don't delete lines under this
-# text("$R_1 = e^{r_2 (1-q)} e^{r_1 q}$", x = 1.9, y = 1.8, cex = 3)
-# text("$R_2 = e^{r_3 (1-q)} e^{r_1 q}$", x = 5.7, y = 3.2, cex = 3)
+# text("$R_0 = e^{r_2 (1-q)} e^{r_1 q}$", x = 1.9, y = 1.8, cex = 3)
+# text("$R_1 = e^{r_3 (1-q)} e^{r_1 q}$", x = 5.7, y = 3.2, cex = 3)
 # # Used the above line to get the latex code written below!
 
 
@@ -460,12 +460,12 @@ tikzAnnotate(c('\\definecolor{winter}{RGB}{33,176,192}', # Define color for the 
 
                # Fist formula in tex synthax for color insertion
                '\\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1348.12,628.18)',
-               '{$R_1 = e^{\\textcolor{low_summer}{r_2} \\tau } e^{\\textcolor{winter}{r_1} (1-\\tau)}$};',
+               '{$R_0 = e^{\\textcolor{low_summer}{r_2} \\tau } e^{\\textcolor{winter}{r_1} (1-\\tau)}$};',
                # \textcolor allow to color part of the text. Double \ for escape
 
                # Second formula
                '\\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  3.5] at (1800.03,870.39)',
-               '{$R_2 = e^{\\textcolor{high_summer}{r_3} \\tau } e^{\\textcolor{winter}{r_1} (1- \\tau )}$};')
+               '{$R_1 = e^{\\textcolor{high_summer}{r_3} \\tau } e^{\\textcolor{winter}{r_1} (1- \\tau )}$};')
 )
 
 

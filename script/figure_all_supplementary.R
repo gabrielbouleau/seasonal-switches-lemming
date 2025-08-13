@@ -104,7 +104,7 @@ axis(2, lwd.ticks = 1, labels = c(1,2,5,10,20,50,100,200,500), c(1,2,5,10,20,50,
 
 
 mtext("Mean period", side = 2, line = 3, cex = 2)
-mtext("$R_1$ value", side = 1, line = 3, cex = 2)
+mtext("$R_0$ value", side = 1, line = 3, cex = 2)
 
 
 # Add horizontal line for period length
@@ -512,8 +512,8 @@ plot(R2 ~ R1, type = "l", log = "xy",
 axis(1, cex.axis = 1.5)
 axis(2, cex.axis = 1.5)
 
-mtext(expression("R"[2]), side = 2, line = 3, cex = 2)
-mtext(expression("R"[1]), side = 1, line = 3, cex = 2)
+mtext(expression("R"[1]), side = 2, line = 3, cex = 2)
+mtext(expression("R"[0]), side = 1, line = 3, cex = 2)
 
 # Find other R1-R2 coordinates for other k
 for(i in 2:length(k)){

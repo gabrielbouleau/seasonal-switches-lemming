@@ -48,13 +48,13 @@ plot(1, type = "n",
 axis(1, cex.axis = 1.5)
 axis(2, cex.axis = 1.5, at = c(0, 0.5, 1))
 
-mtext("Lemming density (n/ha)", side = 1, line = 3, cex = 1.7)
-mtext("Owl discretised\npresence", side = 2, line = 3, cex = 1.7)
+mtext("Lemming density (n/ha)", side = 1, line = 3, cex = 2)
+mtext("Owl discretised\npresence", side = 2, line = 3, cex = 2)
 
 
 # abline(v = rnorm(1000, threshold$owl$mu, threshold$owl$sd), col = color[1])
-abline(v = threshold$owl$mu + qnorm(0.975)*threshold$owl$sd, lty = 2, lwd = 2)
-abline(v = threshold$owl$mu - qnorm(0.975)*threshold$owl$sd, lty = 2, lwd = 2)
+abline(v = threshold$owl$mu + qnorm(0.975)*threshold$owl$sd, lty = 2, lwd = 1.7)
+abline(v = threshold$owl$mu - qnorm(0.975)*threshold$owl$sd, lty = 2, lwd = 1.7)
 
 points(owl ~ density, data = predator)
 

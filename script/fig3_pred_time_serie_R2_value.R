@@ -134,18 +134,31 @@ mtext("A)", adj = -0.1, line = 2, cex = 2)
 
 par(mar = c(5.5, 6.5, 3.5, 2.5), bty = "o")
 
-# Fake plot
-barplot(Growth ~ year, data = Growth[-nrow(Growth),], ylim = c(-5, 5), col = NA, border = NA,
-        xaxt = "n", yaxt = "n", space = 0, cex.lab = 2.5, ylab = "Growth rate")
+options(scipen = 999)
 
-axis(side = 2, at = seq(-5, 5, by = 2.5), cex.axis = 2)
+# Replace the second barplot with a rect loop
+vals <- exp(Growth$Growth)
+bp <- barplot(rep(1, length(vals)), ylim = c(0.01, 100), col = NA, border = NA,
+              xaxt = "n", yaxt = "n", space = 0, cex.lab = 2.5,
+              ylab = "Growth rate", log = "y")
 
-abline(h = c(seq(-5, 5, by = 2.5)), col = color[1], lty = 2)
+axis(2, at = c(0.01, 0.1, 1, 10, 100),
+     labels = c("0.01", "0.1", "1", "10", "100"),
+     cex.axis = 2)
+abline(h = c(0.01, 0.1, 1, 10, 100), col = color[1], lty = 2)
 
-# To have the bars above the horizontal grey lines
-barplot(Growth ~ year, data = Growth[-nrow(Growth),], xlab = NA, xaxt = "n", yaxt = "n", 
-        col = color[1], space = 0, add = TRUE, border = NA)
+# Draw bars from baseline 1
+bar_width <- 1.1
+for (i in seq_along(vals)) {
+  rect(xleft  = bp[i] - bar_width/2 + 0.05*i,
+       ybottom = min(vals[i], 1),
+       xright  = bp[i] + bar_width/2 + 0.05*i,
+       ytop    = max(vals[i], 1),
+       col     = color[1],
+       border  = color[1])
+}
 
+mtext("Year", side = 1, line = 2, cex = 2)
 mtext("B)", adj = -0.1, line = 3, cex = 2)
 
 

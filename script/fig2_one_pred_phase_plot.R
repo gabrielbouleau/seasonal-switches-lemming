@@ -48,11 +48,11 @@ plot(R2 ~ R1, type = "l", log = "xy",
      yaxt = "n", xaxt = "n",
      ylab =""  , xlab = "")
 
-axis(1, cex.axis = 1.3)
-axis(2, cex.axis = 1.3)
+axis(1, cex.axis = 2)
+axis(2, cex.axis = 2)
 
-mtext("$R_1$", side = 2, line = 2.2, cex = 1.6)
-mtext("$R_0$", side = 1, line = 2.6, cex = 1.6)
+mtext("$R_1$", side = 2, line = 2.6, cex = 1.8)
+mtext("$R_0$", side = 1, line = 2.6, cex = 1.8)
 
 # Find other R1-R2 coordinates for other k
 for(i in 2:length(k)){
@@ -82,9 +82,10 @@ for (i in 1:length(k_vector)) {
 points(diagonal[,1], diagonal[, 2], pch = 19, cex = 1.5, col = color)
 
 # labels the diagonals
-text(x = c(3.8, 8, 75, 80, 80), 
+text(x = c(3.7, 6, 70, 68, 68), 
      y = c(0.011, 0.011, 0.011, 0.095, 0.205), 
-     labels = c("$k=3$", "$k=2$", "$k=1$", "$1/k=1/2$", "$1/k=1/3$"))
+     labels = c("$k=3$", "$k=2$", "$k=1$", "$1/k=1/2$", "$1/k=1/3$"),
+     cex = 1.5)
 
 #---------------------------------------#
 # Time series at different k values     #
@@ -115,20 +116,20 @@ for (i in 1:length(k_vector)) {
   if(i >= 5 ){
     lcolor <- grey
     
-    plot(L[23:43], type = "l", yaxt = "n", xaxt = "n", main = paste0("P = ", P_vector_name[i], ", 1/k = ", k_vector_name[i]), col = lcolor, cex.main = 1.5)
+    plot(L[23:43], type = "l", yaxt = "n", xaxt = "n", main = paste0("$P$ = ", P_vector_name[i], ", $1/k$ = ", k_vector_name[i]), col = lcolor, cex.main = 2)
     points(L[23:43], pch = 19, col = color[i])
     abline(h = 2, lty = 2)
   
   } else {
     lcolor <- "black"
     
-    plot(L[23:43], type = "l", yaxt = "n", xaxt = "n", main = paste0("P = ", P_vector_name[i], ", k = ", k_vector_name[i]), col = lcolor, cex.main = 1.5)
+    plot(L[23:43], type = "l", yaxt = "n", xaxt = "n", main = paste0("$P$ = ", P_vector_name[i], ", $k$ = ", k_vector_name[i]), col = lcolor, cex.main = 2)
     points(L[23:43], pch = 19, col = color[i])
     abline(h = 2, lty = 2)
     }
 
   if (i == 1){
-    text(2, 1.8, "$L^*$", cex = 1.5, font = 2)
+    text(2, 1.8, "$L^*$", cex = 2, font = 2)
     mtext("years", side = 1)
     mtext("density", side = 2)}
   

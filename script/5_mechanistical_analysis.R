@@ -67,7 +67,7 @@ saveRDS(pred, "data_clean/5_meca_attack_rate.RDS")
 # Lemming growth rate = 0.5
 r <- 4.62
 
-Density <- readRDS("data_clean/5_PredMeanDensity.rds")
+Density <- readRDS("data_clean/2_PredMeanDensity.rds")
 
 q <- 0.75
 

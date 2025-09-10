@@ -154,7 +154,7 @@ predator <- mutate(predator,
 #   Time-serie comparison plot    #
 #---------------------------------#
 
-tikz("fig5_growth_rate_time_series.tex", height = 5, width = 10, standAlone = TRUE)
+tikz("fig5_growth_rate_time_series.tex", height = 4, width = 8, standAlone = TRUE)
 
 # Set layout and margin
 layout(matrix(c(1,1,1,2,
@@ -192,7 +192,7 @@ polygon(x = c(predator$year, rev(predator$year)),
         y = exp(c(predator$ pheno_upr, rev(predator$pheno_lwr))), 
         col = adjustcolor(color[4], alpha = 0.20), border = NA)
 
-legend("bottom", legend = c( "Empirical", "Mechanistic", "Phenomenologic"), ncol = 3, cex = 2,
+legend("bottom", legend = c( "Empirical", "Mechanistic", "Phenomenologic"), ncol = 3, cex = 1.5,
        pt.bg = 'white', lty = 1, lwd = c(2, 1.2, 1.2), bty = "n", pch = c(19, 22, 21), col = c("black", color[3:4]))
 
 #----------------#

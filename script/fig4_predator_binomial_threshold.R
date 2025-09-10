@@ -17,7 +17,7 @@ color <- rgb(color[, 1], color[, 2], color[,3], max = 255)
 lemmingDensity <- readRDS("data_clean/1_lemmingMeanDensity.rds")[, c(1,2)]
 
 # Predator presence/absence (from script 'PredatorDensity.r')
-predator <- readRDS("data_clean/5_PredatorPresence.rds") %>% 
+predator <- readRDS("data_clean/2_PredatorPresence.rds") %>% 
   filter(period == "P1") %>% 
   dplyr::select(year, fox_repro, jaeger, owl, weasel)
 
@@ -32,7 +32,7 @@ glm <- readRDS("data_clean/3_binomial_glm.rds")
 #   Plot binomial model + inflection point   #
 #--------------------------------------------#
 
-tikz("fig4_predator_binomial_threshold.tex", height = 10, width = 12, standAlone = TRUE)
+tikz("fig4_predator_binomial_threshold.tex", height = 7.5, width = 9, standAlone = TRUE)
 # Investigate the two outlier point in the owl binomial point
 
 set.seed(22)

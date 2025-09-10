@@ -15,11 +15,13 @@ color <- rgb(color[,1], color[, 2], color[, 3], maxColorValue = 255)[4:7]
 
 # Plot size : 30 * 15
 
-tikz("fig1_schema.tex", height = 18, width = 28, standAlone = TRUE)
+tikz("fig1_schema.tex", height = 30, width = 16, standAlone = TRUE)
 
-layout(matrix(c(1,1,2,2,6,6,6,
-                3,3,4,4,6,6,6,
-                5,5,5,5,6,6,6), ncol = 7, byrow = TRUE))
+layout(matrix(c(1,1,2,2,
+                3,3,4,4,
+                5,5,5,5,
+                6,6,6,6,
+                6,6,6,6), ncol = 4, byrow = TRUE))
 
 par(mar = c(8.1, 12.1, 15, 5.1), mgp = c(3, 2, 0))
 
@@ -177,6 +179,7 @@ mtext("E)", adj = -0.3, line = 3, cex = 3)
 #---------------------------------------#
 par(mar = c(8.1, 8.1, 4.1, 3.1), mgp = c(3, 2, 0))
 
+
 # Convert svg file to cairo svg file format
 rsvg_svg(svg = "svg/lemming_black.svg", file = "svg/lemming_black_cairo.svg")
 rsvg_svg(svg = "svg/snowy_owl_2.svg", file = "svg/snowy_owl_2_cairo.svg")
@@ -233,23 +236,23 @@ text("$\\geq L^*$", x = 0.82, y = 0.85, cex = 5)
 text("$< L^*$", x = 0.18, y = 0.85, cex = 5)
 
 # Plot svg
-grid.picture(SVGlemming,  x = 0.14, y = 0.08,
+grid.picture(SVGlemming,  x = 0.255, y = 0.448,
              width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
-grid.picture(SVGlemming,   x = 0.3, y = 0.08,
+grid.picture(SVGlemming,   x = 0.54, y = 0.448,
              width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
-grid.picture(SVGlemming,  x = 0.46, y = 0.08,
+grid.picture(SVGlemming,  x = 0.82, y = 0.448,
              width = grid::unit(1.21, "in"), height = grid::unit(1.3, "in"))
 
 
-grid.picture(SVGowl_dashed,  x = 0.12, y = 0.14,
+grid.picture(SVGowl_dashed,  x = 0.21, y = 0.482,
              width = grid::unit(2.5, "in"), height = grid::unit(3, "in"))
 
-grid.picture(SVGowl_dashed,  x = 0.28, y = 0.14,
+grid.picture(SVGowl_dashed,  x = 0.49, y = 0.482,
              width = grid::unit(2.5, "in"), height = grid::unit(2.9, "in"))
 
-grid.picture(SVGowl_black,  x = 0.44, y = 0.14,
+grid.picture(SVGowl_black,  x = 0.77, y = 0.482,
              width = grid::unit(2.5, "in"), height = grid::unit(2.8, "in"))
 
 mtext("C)", adj = 0, line = -4, cex = 3)
@@ -397,7 +400,9 @@ SVGjaeger_dashed <- readPicture("svg/lt_jaeger_dashed_2_cairo.svg")
 # Create plot   #
 #---------------#
 
-par(mar = c(37.3, 7.1, 37.3, 5.1), mgp = c(3, 3, 0))
+# par(mar = c(37.3, 7.1, 37.3, 5.1), mgp = c(3, 3, 0))
+par(mar = c(10.1, 14.1, 4.1, 4.1), mgp = c(3, 2, 0))
+
 
 plot(L, type = "l", bty = "L",
      yaxt = "n", xaxt = "n",
@@ -470,17 +475,17 @@ tikzAnnotate(c('\\definecolor{winter}{RGB}{33,176,192}', # Define color for the 
 
 
 # Add icon image in circles
-grid.picture(SVGlemming_grey,  x = 0.66, y = 0.375,
+grid.picture(SVGlemming_grey,  x = 0.23, y = 0.124,
              width = grid::unit(1.098, "in"), height = grid::unit(0.99, "in"))
 
-grid.picture(SVGjaeger_dashed,  x = 0.64, y = 0.40,
-             width = grid::unit(2.34, "in"), height = grid::unit(1.62, "in"))
+grid.picture(SVGjaeger_dashed,  x = 0.19, y = 0.146,
+             width = grid::unit(3.5, "in"), height = grid::unit(2.2, "in"))
 
-grid.picture(SVGlemming_grey,  x = 0.89, y = 0.56,
+grid.picture(SVGlemming_grey,  x = 0.77, y = 0.244,
              width = grid::unit(1.089, "in"), height = grid::unit(0.99, "in"))
 
-grid.picture(SVGjaeger_grey,  x = 0.87, y = 0.585,
-             width = grid::unit(2.34, "in"), height = grid::unit(1.62, "in"))
+grid.picture(SVGjaeger_grey,  x = 0.73, y = 0.265,
+             width = grid::unit(3.5, "in"), height = grid::unit(2.2, "in"))
 
 mtext("F)", adj = -0.1, line = 5, cex = 3)
 

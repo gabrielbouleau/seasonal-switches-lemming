@@ -1,5 +1,7 @@
 # seasonal-switches-lemming
 
+[![DOI](https://zenodo.org/badge/534349655.svg)](https://doi.org/10.5281/zenodo.17095006)
+
 This README file contain the information required to reproduce the result of the paper "Simple seasonal switches in food web composition unveil the complexity of an Arctic predatory-prey system" This paper is available here [Link to publication].
 
 ## Authors
